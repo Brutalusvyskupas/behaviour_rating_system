@@ -1,0 +1,6 @@
+- Users (roles)
+- Category (by sectors, offices)
+- Rating (with a review), tags (open minded, friendly, etc)
+- Pools (by rating)
+
+- User dashboard (Ratings about you, dots through time, pool mentions, reviews ) https://www.youtube.com/watch?v=HU6FWSxNrtw
