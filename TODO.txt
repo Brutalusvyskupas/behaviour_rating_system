@@ -1,6 +1,8 @@
 - Users (roles)
+- Offices 
 - Category (by sectors, offices)
-- Rating (with a review), tags (open minded, friendly, etc)
-- Pools (by rating)
+- Rating (with a review), tags (open minded, friendly, etc) https://www.youtube.com/watch?v=dZywiX-Glu4
+- Charts (by rating, tags) https://www.youtube.com/watch?v=1OL5n06kO_w
+    - Number of votes (vertical), tags (horizontal)
 
 - User dashboard (Ratings about you, dots through time, pool mentions, reviews ) https://www.youtube.com/watch?v=HU6FWSxNrtw
