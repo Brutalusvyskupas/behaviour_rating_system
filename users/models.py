@@ -37,8 +37,11 @@ class UserAccountManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     unique_id = models.UUIDField(
         default=uuid.uuid4, editable=False, unique=True)
-    work_office = models.ForeignKey(WorkOffice, null=True, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
+    work_office = models.ForeignKey(
+        WorkOffice, null=True, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100, default='untitled')
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100, blank=True)
     email = models.EmailField(_("email address"), unique=True)
     phone_number = models.CharField(max_length=15, blank=True)
     address_line = models.CharField(max_length=100, blank=True)

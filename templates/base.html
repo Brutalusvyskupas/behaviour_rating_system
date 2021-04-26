@@ -6,15 +6,21 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title></title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <link rel="stylesheet" href="{% static 'css/custom.css' %}">
         <link rel="stylesheet" href="{% static 'js/custom.js' %}">
     </head>
     <body>
+
+        {% include 'navbar.html' %}
     
         {% block content%}
         {% endblock content %}
-        <script src="" async defer></script>
+
+        {% include 'footer.html' %}
+
+        <script src="{% static 'js/custom.js' %}"></script>
     </body>
 </html>

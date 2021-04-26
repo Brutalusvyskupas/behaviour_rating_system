@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %}Create an account{% endblock title %}
+
+{% block content %}
+
+
+<style>
+    .container-fluid {
+        padding-bottom: 125px;
+    }
+
+    .account-form input {
+        border: 2px solid #ccc;
+        height: calc(2em + .75rem + 2px);
+    }
+
+    .account-form input:focus {
+        border-color: #1497ff;
+        box-shadow: none;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row no-gutter">
+        <div class="col-md-12">
+            <div class="login d-flex align-items-center py-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-lg-7  mx-auto">
+                            <form class="account-form p-4 rounded col-lg-10 mx-auto" action="." method="post">
+                                {% csrf_token %}
+                                <h3 class="mb-2 font-weight-bold">Sukurti paskyrą</h3>
+                                <p class="mb-4">Tai nieko nekainuoja ir užtruksite kelias sekundes.</p>
+
+                                {% if form.errors %}
+                                <p>Please correct the following errors:</p>
+                                {% for field in form %}
+                                {% if field.errors %}
+                                <div class="alert alert-primary" role="alert">
+                                    {{ field.label }}: {{ field.errors|striptags }}
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                                {% endif %}
+
+                                <label>{{ form.email.label}}<span class="text-muted small">
+                                        (Privaloma)</span></label>
+                                {{ form.email }}
+                                <label>{{ form.first_name.label}}<span class="text-muted small">
+                                        (Privaloma)</span></label>
+                                {{ form.first_name }}
+                                <label>{{ form.last_name.label}}<span class="text-muted small">
+                                        (Privaloma)</span></label>
+                                {{ form.last_name }}
+                                <label>{{ form.work_office.label}}<span class="text-muted small">
+                                    </span></label>
+                                {{ form.work_office }}
+                                <label>{{ form.title.label}}<span class="text-muted small">
+                                    </span></label>
+                                {{ form.title }}
+                                <label>{{ form.phone_number.label}}<span class="text-muted small">
+                                    </span></label>
+                                {{ form.phone_number }}
+                                <label>{{ form.password.label}}<span class="text-muted mb-4">
+                                    </span></label>
+                                <small class="form-text text-muted mb-4 small">
+                                    Ne mažiau 8 simbolių bei vieno skaičiaus
+                                </small>
+                                {{ form.password }}
+                                <label>{{ form.password2.label}}<span class="text-muted small">
+                                        (Privaloma)</span></label>
+                                {{ form.password2 }}
+                                <button class="btn btn-primary btn-block py-2 mb-4 mt-5 fw500 w-100"
+                                    type="submit">Registruotis</button>
+                                <p class="text-center">
+                                    <a href="#">Jau turite paskyrą?</a>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
