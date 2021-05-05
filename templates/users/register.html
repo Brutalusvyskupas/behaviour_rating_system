@@ -4,86 +4,121 @@
 
 {% block content %}
 
+{% include 'navbar.html' %}
 
-<style>
-    .container-fluid {
-        padding-bottom: 125px;
-    }
+<div id="register" class="flex justify-center">
+    <form action="." method="post" class="w-full max-w-lg">
+        {% csrf_token %}
+        {% if form.errors %}
+        <p>Please correct the following errors:</p>
+        {% for field in form %}
+        {% if field.errors %}
+        <div class="alert alert-primary" role="alert">
+            {{ field.label }}: {{ field.errors|striptags }}
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                    First Name
+                </label>
+                {{ form.first_name }}
+                <p class="text-red-500 text-xs italic">Please fill out this field.</p>
+            </div>
+            <div class="w-full md:w-1/2 px-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                    Last Name
+                </label>
+                {{ form.last_name }}
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full px-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                    Email
+                </label>
+                {{ form.email }}
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full px-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                    Phone Number
+                </label>
+                {{ form.phone_number }}
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full px-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                    Password
+                </label>
+                {{ form.password }}
+                <p class="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full px-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                    Repeat Password
+                </label>
+                {{ form.password2 }}
+                <p class="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>
+            </div>
+        </div>
 
-    .account-form input {
-        border: 2px solid #ccc;
-        height: calc(2em + .75rem + 2px);
-    }
 
-    .account-form input:focus {
-        border-color: #1497ff;
-        box-shadow: none;
-    }
-</style>
-
-<div class="container-fluid">
-    <div class="row no-gutter">
-        <div class="col-md-12">
-            <div class="login d-flex align-items-center py-5">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 col-lg-7  mx-auto">
-                            <form class="account-form p-4 rounded col-lg-10 mx-auto" action="." method="post">
-                                {% csrf_token %}
-                                <h3 class="mb-2 font-weight-bold">Sukurti paskyrą</h3>
-                                <p class="mb-4">Tai nieko nekainuoja ir užtruksite kelias sekundes.</p>
-
-                                {% if form.errors %}
-                                <p>Please correct the following errors:</p>
-                                {% for field in form %}
-                                {% if field.errors %}
-                                <div class="alert alert-primary" role="alert">
-                                    {{ field.label }}: {{ field.errors|striptags }}
-                                </div>
-                                {% endif %}
-                                {% endfor %}
-                                {% endif %}
-
-                                <label>{{ form.email.label}}<span class="text-muted small">
-                                        (Privaloma)</span></label>
-                                {{ form.email }}
-                                <label>{{ form.first_name.label}}<span class="text-muted small">
-                                        (Privaloma)</span></label>
-                                {{ form.first_name }}
-                                <label>{{ form.last_name.label}}<span class="text-muted small">
-                                        (Privaloma)</span></label>
-                                {{ form.last_name }}
-                                <label>{{ form.work_office.label}}<span class="text-muted small">
-                                    </span></label>
-                                {{ form.work_office }}
-                                <label>{{ form.title.label}}<span class="text-muted small">
-                                    </span></label>
-                                {{ form.title }}
-                                <label>{{ form.phone_number.label}}<span class="text-muted small">
-                                    </span></label>
-                                {{ form.phone_number }}
-                                <label>{{ form.password.label}}<span class="text-muted mb-4">
-                                    </span></label>
-                                <small class="form-text text-muted mb-4 small">
-                                    Ne mažiau 8 simbolių bei vieno skaičiaus
-                                </small>
-                                {{ form.password }}
-                                <label>{{ form.password2.label}}<span class="text-muted small">
-                                        (Privaloma)</span></label>
-                                {{ form.password2 }}
-                                <button class="btn btn-primary btn-block py-2 mb-4 mt-5 fw500 w-100"
-                                    type="submit">Registruotis</button>
-                                <p class="text-center">
-                                    <a href="#">Jau turite paskyrą?</a>
-                                </p>
-                            </form>
-                        </div>
+        <div class="flex flex-wrap -mx-3 mb-2">
+            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+                    Office
+                </label>
+                <div class="relative">
+                    {{ form.work_office }}
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                        </svg>
                     </div>
                 </div>
             </div>
+
+            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
+                    Title
+                </label>
+                {{ form.title }}
+            </div>
         </div>
-    </div>
+
+        <div class="w-full px-3 mb-6 md:mb-0">
+            <div class="flex flex-wrap -mx-3 mb-6">
+
+                <label class="w-full block text-gray-500 font-bold">
+                    {{ form.gpdr_field }}
+                    <span class="text-sm">
+                        I consent to having this website store my submitted information so they can
+                        respond to my inquiry.
+                    </span>
+                </label>
+            </div>
+
+
+            <div class="flex flex-wrap -mx-3 mb-6">
+
+                <div class="w-full flex justify-center">
+                    <button type="submit" value="Submit"
+                        class="shadow-none bg-blue-700 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-4 px-10 rounded-full">
+                        Sign Up
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 
+{% include 'footer.html' %}
 
 {% endblock content %}

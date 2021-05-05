@@ -1,7 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
-from .models import User
-from offices.models import WorkOffice
+from .models import User, UserWorkOffice
 
 
 class RegistrationForm(forms.ModelForm):
@@ -15,12 +14,13 @@ class RegistrationForm(forms.ModelForm):
     email = forms.EmailField(max_length=100, help_text='Required', error_messages={
         'required': 'Sorry, you will need an email'})
     work_office = forms.ModelChoiceField(
-        queryset=WorkOffice.objects.all(), required=True)
+        queryset=UserWorkOffice.objects.all(), required=True)
     title = forms.CharField(max_length=100, label="Title")
     phone_number = forms.CharField(max_length=20, label="Phone number")
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(
         label='Repeat password', widget=forms.PasswordInput)
+    gpdr_field = forms.BooleanField(required=True)
 
     class Meta:
         model = User
@@ -57,21 +57,21 @@ class RegistrationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['first_name'].widget.attrs.update(
-            {'class': 'form-control mb-3', 'placeholder': 'First Name'})
+            {'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded-full py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white', 'placeholder': 'First Name'})
         self.fields['last_name'].widget.attrs.update(
-            {'class': 'form-control mb-3', 'placeholder': 'Last_name'})
+            {'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded-full py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'placeholder': 'Last Name'})
         self.fields['email'].widget.attrs.update(
-            {'class': 'form-control mb-3', 'placeholder': 'E-mail', 'name': 'email', 'id': 'id_email'})
+            {'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded-full py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'placeholder': 'you@example.com', 'name': 'email', 'id': 'id_email'})
         self.fields['work_office'].widget.attrs.update(
-            {'class': 'form-control mb-3', 'placeholder': 'Office', 'name': 'email'})
+            {'class': 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded-full leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'placeholder': 'Office', 'name': 'email'})
         self.fields['title'].widget.attrs.update(
-            {'class': 'form-control mb-3', 'placeholder': 'title'})
+            {'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded-full py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'placeholder': 'title'})
         self.fields['phone_number'].widget.attrs.update(
-            {'class': 'form-control mb-3', 'placeholder': 'Phone number'})
+            {'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded-full py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'placeholder': 'Phone number'})
         self.fields['password'].widget.attrs.update(
-            {'class': 'form-control mb-3', 'placeholder': 'Password'})
+            {'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded-full py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'placeholder': 'Password'})
         self.fields['password2'].widget.attrs.update(
-            {'class': 'form-control', 'placeholder': 'Repeat Password'})
+            {'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded-full py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'placeholder': 'Repeat Password'})
 
 
 class LoginForm(AuthenticationForm):

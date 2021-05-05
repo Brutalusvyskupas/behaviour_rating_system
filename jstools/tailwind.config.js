@@ -11,7 +11,10 @@ module.exports = {
       ]
   },
   theme: {
-      extend: {},
+    container: {
+      center: true,
+    },
+    extend: {},
   },
   variants: {
     display: ['responsive', 'group-hover', 'group-focus'],

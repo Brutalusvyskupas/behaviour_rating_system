@@ -1,6 +1,39 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
+
 from .forms import RegistrationForm
+from .models import User, UserWorkOffice
+
+
+def dashboard(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    context = {
+        'user': user,
+    }
+    return render(request, 'users/dashboard.html', context)
+
+
+def users_list(request):
+    offices = UserWorkOffice.objects.all()
+    context = {
+        'offices': offices,
+    }
+    return render(request, 'users/users_list.html', context)
+
+
+# def list_of_users_by_office(request, office_slug):
+#     offices = UserWorkOffice.objects.all()
+#     users = User.objects.all()
+#     if office_slug:
+#         office = get_object_or_404(UserWorkOffice, slug=office_slug)
+#         user = users.filter(work_office=work_office)
+#     context = {
+#         'offices': offices,
+#         'office': office,
+#         'users': users,
+#         'user': user
+#     }
+#     return render(request, 'users/list_of_users_by_office.html', context)
 
 
 def register(request):
