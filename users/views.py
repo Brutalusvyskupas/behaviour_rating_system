@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 
 from .forms import RegistrationForm
 from .models import User, UserWorkOffice
 
-
+@login_required
 def dashboard(request, pk):
     user = get_object_or_404(User, pk=pk)
     context = {
@@ -12,7 +13,7 @@ def dashboard(request, pk):
     }
     return render(request, 'users/dashboard.html', context)
 
-
+@login_required
 def users_list(request):
     offices = UserWorkOffice.objects.all()
     context = {
@@ -20,20 +21,28 @@ def users_list(request):
     }
     return render(request, 'users/users_list.html', context)
 
+@login_required
+def list_of_offices(request):
+    offices = UserWorkOffice.objects.order_by("office_name")
+    context = {
+        'offices': offices,
+    }
+    return render(request, 'users/list_of_offices.html', context)
 
-# def list_of_users_by_office(request, office_slug):
-#     offices = UserWorkOffice.objects.all()
-#     users = User.objects.all()
-#     if office_slug:
-#         office = get_object_or_404(UserWorkOffice, slug=office_slug)
-#         user = users.filter(work_office=work_office)
-#     context = {
-#         'offices': offices,
-#         'office': office,
-#         'users': users,
-#         'user': user
-#     }
-#     return render(request, 'users/list_of_users_by_office.html', context)
+@login_required
+def list_of_users_by_office(request, office_slug):
+    offices = UserWorkOffice.objects.all()
+    queryset = User.objects.all()
+    if office_slug:
+        work_office = get_object_or_404(UserWorkOffice, slug=office_slug)
+        queryset = queryset.filter(work_office=work_office)
+
+    context = {
+        'offices': offices,
+        'queryset': queryset,
+        'work_office': work_office
+    }
+    return render(request, 'users/list_of_users_by_office.html', context)
 
 
 def register(request):

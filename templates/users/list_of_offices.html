@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for office in offices  %}
+
+    <h1><a href="{{ office.get_absolute_url }}">{{ office.office_name }}</a></h1>
+
+{% endfor %}
+
+{% endblock content %}
