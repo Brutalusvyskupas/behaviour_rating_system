@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 
-from .views import register, dashboard, users_list, list_of_offices, list_of_users_by_office
+from .views import register, users_list, list_of_offices, list_of_users_by_office, user_details
 from .forms import LoginForm
 
 
@@ -15,6 +15,6 @@ urlpatterns = [
     path('offices/<str:office_slug>/', list_of_users_by_office,
          name='list_of_users_by_office'),
     path('users/', users_list, name='list_of_users'),
-    path('dashboard/<uuid:pk>/', dashboard, name='dashboard'),
+    path('users/<uuid:pk>/', user_details, name='user_details'),
     path('register/', register, name="register"),
 ]

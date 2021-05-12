@@ -150,8 +150,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Custom user model
 AUTH_USER_MODEL = "users.User"
-LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = '/'
+LOGIN_REDIRECT_URL = '/home'
+LOGIN_URL = '/home'
 LOGOUT_URL = "/"
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"

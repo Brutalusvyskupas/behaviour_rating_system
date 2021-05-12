@@ -17,7 +17,8 @@
         <!-- primary nav -->
         <div class="hidden md:flex items-center space-x-1">
         {% if user.is_authenticated %}
-          <a href="{{ user.get_absolute_url }}" class="py-5 px-3 text-gray-700 hover:text-gray-900">Dashboard</a>
+          <a href="{{ user.get_absolute_url }}" class="py-5 px-3 text-gray-700 hover:text-gray-900">My Profile</a>
+          <a href="{% url 'home' %}" class="py-5 px-3 text-gray-700 hover:text-gray-900">Dashboard</a>
         {% else %}
 
         {% endif %}
@@ -50,7 +51,7 @@
   <div class="mobile-menu hidden md:hidden">
   {% if user.is_authenticated %}
     <a href="{% url 'users:logout' %}" class="block py-2 px-4 text-sm hover:bg-gray-200">Logout</a>
-    <a href="{{ user.get_absolute_url }}" class="block py-2 px-4 text-sm hover:bg-gray-200">Dashboard</a>
+    <a href="{{ user.get_absolute_url }}" class="block py-2 px-4 text-sm hover:bg-gray-200">My Profile</a>
   {% else %}
     <a href="{% url 'users:register' %}" class="block py-2 px-4 text-sm hover:bg-gray-200">Signup</a>
     <a href="{% url 'users:login' %}" class="block py-2 px-4 text-sm hover:bg-gray-200">Login</a>

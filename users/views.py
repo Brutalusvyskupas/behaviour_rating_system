@@ -6,12 +6,12 @@ from .forms import RegistrationForm
 from .models import User, UserWorkOffice
 
 @login_required
-def dashboard(request, pk):
+def user_details(request, pk):
     user = get_object_or_404(User, pk=pk)
     context = {
         'user': user,
     }
-    return render(request, 'users/dashboard.html', context)
+    return render(request, 'users/user_details.html', context)
 
 @login_required
 def users_list(request):
@@ -64,7 +64,7 @@ def register(request):
             user.save()
             registerForm.save_m2m()
             login(request, user)
-            return redirect("/")
+            return redirect("/home")
     else:
         registerForm = RegistrationForm()
     return render(request, 'users/register.html', {'form': registerForm})
