@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # My apps
     'users',
+    'ratings',
     # 3rd party apps
 
 ]

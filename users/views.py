@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 
-from .forms import RegistrationForm
+from .forms import RegistrationForm, EditUserForm
 from .models import User, UserWorkOffice
+
 
 @login_required
 def user_details(request, pk):
@@ -13,6 +14,7 @@ def user_details(request, pk):
     }
     return render(request, 'users/user_details.html', context)
 
+
 @login_required
 def users_list(request):
     offices = UserWorkOffice.objects.all()
@@ -21,6 +23,7 @@ def users_list(request):
     }
     return render(request, 'users/users_list.html', context)
 
+
 @login_required
 def list_of_offices(request):
     offices = UserWorkOffice.objects.order_by("office_name")
@@ -28,6 +31,7 @@ def list_of_offices(request):
         'offices': offices,
     }
     return render(request, 'users/list_of_offices.html', context)
+
 
 @login_required
 def list_of_users_by_office(request, office_slug):
@@ -68,3 +72,17 @@ def register(request):
     else:
         registerForm = RegistrationForm()
     return render(request, 'users/register.html', {'form': registerForm})
+
+
+def edit_user(request, pk):
+
+    if request.method == 'POST':
+        editForm = EditUserForm(request.POST, instance=request.user)
+        if editForm.is_valid():
+            editForm.save()
+            return redirect('users:user_details', pk=pk)
+            # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+        editForm = EditUserForm(instance=request.user)
+
+    return render(request, 'users/edit_user.html', {'form': editForm})
