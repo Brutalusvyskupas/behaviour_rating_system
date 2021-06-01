@@ -12,7 +12,9 @@ RATE_CHOICES = [
 
 
 class Review(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    reviewed_user = models.ForeignKey(
+        User, related_name='eval_user', on_delete=models.CASCADE)
+    reviewed_by = models.ForeignKey(User, related_name='author', null=True, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
     text = models.TextField(max_length=3000, blank=True)
     rate_professionalism = models.PositiveIntegerField(choices=RATE_CHOICES)
@@ -26,4 +28,4 @@ class Review(models.Model):
     unlikes = models.PositiveIntegerField(default=0)
 
     def __str__(self):
-        return self.user.first_name + self.user.last_name
+        return self.reviewed_user.first_name + self.reviewed_user.last_name

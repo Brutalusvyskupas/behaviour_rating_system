@@ -4,13 +4,17 @@ from django.contrib.auth import login
 
 from .forms import RegistrationForm, EditUserForm
 from .models import User, UserWorkOffice
+from ratings.models import Review
 
 
 @login_required
 def user_details(request, pk):
     user = get_object_or_404(User, pk=pk)
+    user_review = Review.objects.filter(reviewed_user=user)
+    # review = Review.objects.filter(reviewed_user=user)
     context = {
         'user': user,
+        'user_review': user_review,
     }
     return render(request, 'users/user_details.html', context)
 
