@@ -309,6 +309,7 @@
                     </dl>
                 </div>
             </div>
+            {% comment %} AVERAGE OF ALL RATINGS {% endcomment %}
             <div class="px-4 py-5 sm:px-6">
                 <h3 class="text-lg leading-6 font-medium text-gray-900">
                     Employee ratings
@@ -321,7 +322,7 @@
                             Professionalism
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {{ user_review.rate_professionalism }}
+                            {% comment %} {{ user_review.rate_professionalism }} {% endcomment %}
                         </dd>
                     </div>
                     <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -329,7 +330,7 @@
                             Teamwork
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {{ user_review.rate_teamwork }}
+                            {% comment %} {{ user_review.rate_teamwork }} {% endcomment %}
                         </dd>
                     </div>
                     <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -337,15 +338,15 @@
                             Communication
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {{ user_review.rate_communication }}
+                            {% comment %} {{ user_review.rate_communication }} {% endcomment %}
                         </dd>
                     </div>
-                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
                             Organize
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {{ user_review.rate_organize }}
+                            {% comment %} {{ user_review.rate_organize }} {% endcomment %}
                         </dd>
                     </div>
                     <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -353,15 +354,15 @@
                             Problem solving
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {{ user_review.rate_problem_solving }}
+                            {% comment %} {{ user_review.rate_problem_solving }} {% endcomment %}
                         </dd>
                     </div>
-                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
                             Personality
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {{ user_review.rate_personality }}
+                            {% comment %} {{ user_review.rate_personality }} {% endcomment %}
                         </dd>
                     </div>
                     <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -369,7 +370,7 @@
                             Reliability
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {{ user_review.rate_reliability }}
+                            {% comment %} {{ user_review.rate_reliability }} {% endcomment %}
                         </dd>
                     </div>
                 </dl>

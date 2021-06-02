@@ -1,8 +1,8 @@
-
-from ratings.models import Review
+# from ratings.models import Review
 from django.shortcuts import redirect, render, get_object_or_404
-from django.urls.base import reverse
 from django.contrib.auth.decorators import login_required
+# from django.db.models import Avg
+
 
 from users.models import User
 from .forms import RateForm
@@ -11,6 +11,8 @@ from .forms import RateForm
 @login_required
 def rate_user(request, pk):
     r_user = get_object_or_404(User, pk=pk)
+    # score = Review.objects.all().aggregate(Avg('rate_professionalism'), Avg('rate_teamwork'), Avg('rate_communication'),
+    #                                        Avg('rate_organize'), Avg('rate_problem_solving'), Avg('rate_personality'), Avg('rate_reliability')) #
 
     if request.method == 'POST':
         form = RateForm(request.POST)
@@ -24,4 +26,4 @@ def rate_user(request, pk):
     else:
         form = RateForm()
 
-    return render(request, 'ratings/rate.html', {'r_user': r_user, 'form': form})
+    return render(request, 'ratings/rate.html', {'form': form})
