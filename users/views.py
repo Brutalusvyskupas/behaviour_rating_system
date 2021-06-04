@@ -1,3 +1,4 @@
+from django.db.models import Avg
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
@@ -11,10 +12,18 @@ from ratings.models import Review
 def user_details(request, pk):
     user = get_object_or_404(User, pk=pk)
     user_review = Review.objects.filter(reviewed_user=user)
-    # review = Review.objects.filter(reviewed_user=user)
+    avg_rating = Review.objects.filter(reviewed_user=user).aggregate(avg_professionalism=Avg('rate_professionalism'),
+        avg_teamwork=Avg('rate_teamwork'),
+        avg_communication=Avg('rate_communication'),
+        avg_organize=Avg('rate_communication'),
+        avg_problem_solving=Avg('rate_problem_solving'),
+        avg_personality=Avg('rate_personality'),
+        avg_reliability=Avg('rate_reliability'))
+
     context = {
         'user': user,
         'user_review': user_review,
+        'avg_rating': avg_rating,
     }
     return render(request, 'users/user_details.html', context)
 

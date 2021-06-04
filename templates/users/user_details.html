@@ -314,6 +314,9 @@
                 <h3 class="text-lg leading-6 font-medium text-gray-900">
                     Employee ratings
                 </h3>
+                <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                    Average of each rating in scale from 1 to 5.
+                </p>
             </div>
             <div class="border-t border-gray-200">
                 <dl>
@@ -321,57 +324,127 @@
                         <dt class="text-sm font-medium text-gray-500">
                             Professionalism
                         </dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {% comment %} {{ user_review.rate_professionalism }} {% endcomment %}
+                        {% if avg_rating.avg_professionalism >= 4 and avg_rating.avg_professionalism <= 5 %}
+                        <dd class="mt-1 text-sm text-green-600 sm:mt-0 sm:col-span-2">
+                            <strong>{{ avg_rating.avg_professionalism| floatformat:2  }}</strong>
                         </dd>
+                        {% elif avg_rating.avg_professionalism > 3 and avg_rating.avg_professionalism < 4 %}
+                        <dd class="mt-1 text-sm text-yellow-400 sm:mt-0 sm:col-span-2">
+                            <strong>{{ avg_rating.avg_professionalism| floatformat:2 }}</strong>
+                        </dd>
+                        {% else %}
+                        <dd class="mt-1 text-sm text-red-600 sm:mt-0 sm:col-span-2">
+                            <strong>{{ avg_rating.avg_professionalism| floatformat:2 }}</strong>
+                        </dd>
+                        {% endif %}
                     </div>
                     <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
                             Teamwork
                         </dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {% comment %} {{ user_review.rate_teamwork }} {% endcomment %}
+                        {% if avg_rating.avg_teamwork >= 4 and avg_rating.avg_teamwork <= 5 %}
+                        <dd class="mt-1 text-sm text-green-600 sm:mt-0 sm:col-span-2">
+                            <strong>{{ avg_rating.avg_teamwork| floatformat:2 }}</strong>
                         </dd>
+                        {% elif avg_rating.avg_teamwork > 3 and avg_rating.avg_teamwork < 4 %}
+                        <dd class="mt-1 text-sm text-yellow-400 sm:mt-0 sm:col-span-2">
+                            <strong>{{ avg_rating.avg_teamwork| floatformat:2 }}</strong>
+                        </dd>
+                        {% else %}
+                        <dd class="mt-1 text-sm text-red-600 sm:mt-0 sm:col-span-2">
+                            <strong>{{ avg_rating.avg_teamwork| floatformat:2 }}</strong>
+                        </dd>
+                        {% endif %}
                     </div>
                     <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
                             Communication
                         </dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {% comment %} {{ user_review.rate_communication }} {% endcomment %}
+                        {% if avg_rating.avg_rating.avg_communication >= 4 and  avg_rating.avg_rating.avg_communication <= 5%}
+                        <dd class="mt-1 text-sm text-green-600 sm:mt-0 sm:col-span-2">
+                            <strong>{{ avg_rating.avg_communication| floatformat:2 }}</strong>
                         </dd>
+                        {% elif avg_rating.avg_communication > 3 and avg_rating.avg_communication < 4 %}
+                        <dd class="mt-1 text-sm text-yellow-400 sm:mt-0 sm:col-span-2">
+                            <strong>{{ avg_rating.avg_communication| floatformat:2 }}</strong>
+                        </dd>
+                        {% else %}
+                        <dd class="mt-1 text-sm text-red-600 sm:mt-0 sm:col-span-2">
+                            <strong>{{ avg_rating.avg_communication| floatformat:2 }}</strong>
+                        </dd>
+                        {% endif %}
                     </div>
                     <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
                             Organize
                         </dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {% comment %} {{ user_review.rate_organize }} {% endcomment %}
+                        {% if avg_rating.avg_teamwork >= 4 and avg_rating.avg_teamwork <= 5 %}
+                        <dd class="mt-1 text-sm text-green-600 sm:mt-0 sm:col-span-2">
+                            <strong>{{ avg_rating.avg_organize| floatformat:2 }}</strong>
                         </dd>
+                        {% elif avg_rating.avg_organize > 3 and avg_rating.avg_organize < 4 %}
+                        <dd class="mt-1 text-sm text-yellow-400 sm:mt-0 sm:col-span-2">
+                            <strong>{{ avg_rating.avg_organize| floatformat:2 }}</strong>
+                        </dd>
+                        {% else %}
+                        <dd class="mt-1 text-sm text-red-600 sm:mt-0 sm:col-span-2">
+                            <strong>{{ avg_rating.avg_organize| floatformat:2 }}</strong>
+                        </dd>
+                        {% endif %}
                     </div>
                     <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
                             Problem solving
                         </dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {% comment %} {{ user_review.rate_problem_solving }} {% endcomment %}
+                        {% if avg_rating.avg_teamwork >= 4 and avg_rating.avg_teamwork <= 5 %}
+                        <dd class="mt-1 text-sm text-green-600 sm:mt-0 sm:col-span-2">
+                            <strong>{{ avg_rating.avg_problem_solving| floatformat:2 }}</strong>
                         </dd>
+                        {% elif avg_rating.avg_problem_solving > 3 and avg_rating.avg_problem_solving < 4 %}
+                        <dd class="mt-1 text-sm text-yellow-400 sm:mt-0 sm:col-span-2">
+                            <strong>{{ avg_rating.avg_problem_solving| floatformat:2 }}</strong>
+                        </dd>
+                        {% else %}
+                        <dd class="mt-1 text-sm text-red-600 sm:mt-0 sm:col-span-2">
+                            <strong>{{ avg_rating.avg_problem_solving| floatformat:2 }}</strong>
+                        </dd>
+                        {% endif %}
                     </div>
                     <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
                             Personality
                         </dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {% comment %} {{ user_review.rate_personality }} {% endcomment %}
+                        {% if avg_rating.avg_personality >= 4 and avg_rating.avg_personality <= 5 %}
+                        <dd class="mt-1 text-sm text-green-600 sm:mt-0 sm:col-span-2">
+                            <strong>{{ avg_rating.avg_personality| floatformat:2 }}</strong>
                         </dd>
+                        {% elif avg_rating.avg_personality > 3 and avg_rating.avg_personality < 4 %}
+                        <dd class="mt-1 text-sm text-yellow-400 sm:mt-0 sm:col-span-2">
+                            <strong>{{ avg_rating.avg_personality| floatformat:2 }}</strong>
+                        </dd>
+                        {% else %}
+                        <dd class="mt-1 text-sm text-red-600 sm:mt-0 sm:col-span-2">
+                            <strong>{{ avg_rating.avg_personality| floatformat:2 }}</strong>
+                        </dd>
+                        {% endif %}
                     </div>
                     <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
                             Reliability
                         </dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {% comment %} {{ user_review.rate_reliability }} {% endcomment %}
+                        {% if avg_rating.avg_reliability >= 4 and avg_rating.avg_reliability <= 5 %}
+                        <dd class="mt-1 text-sm text-green-600 sm:mt-0 sm:col-span-2">
+                            <strong>{{ avg_rating.avg_reliability| floatformat:2 }}</strong>
                         </dd>
+                        {% elif avg_rating.avg_reliability > 3 and avg_rating.avg_reliability < 4 %}
+                        <dd class="mt-1 text-sm text-yellow-400 sm:mt-0 sm:col-span-2">
+                            <strong>{{ avg_rating.avg_reliability| floatformat:2 }}</strong>
+                        </dd>
+                        {% else %}
+                        <dd class="mt-1 text-sm text-red-600 sm:mt-0 sm:col-span-2">
+                            <strong>{{ avg_rating.avg_reliability| floatformat:2 }}</strong>
+                        </dd>
+                        {% endif %}
                     </div>
                 </dl>
             </div>
@@ -381,7 +454,7 @@
                 </h3>
             </div>
             <div class="border-t border-gray-200">
-            {% for review in user_review %}
+                {% for review in user_review %}
                 <dl>
                     <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
@@ -392,7 +465,7 @@
                         </dd>
                     </div>
                 </dl>
-            {% endfor %}
+                {% endfor %}
             </div>
         </main>
     </div>

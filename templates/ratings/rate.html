@@ -238,6 +238,9 @@
                     <p class="mt-1 max-w-2xl text-sm text-gray-500">
                         Personal details.
                     </p>
+                    <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                        Rate user in scale from 1 to 5 by each category.
+                    </p>
                 </div>
                 <form method="post">
                     {% csrf_token %}
@@ -260,7 +263,6 @@
                                 </dt>
                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                                     {{ form.rate_professionalism }}
-                                    <div class="text-sm font-medium text-gray-500"></div>
                                 </dd>
                             </div>
                             <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">

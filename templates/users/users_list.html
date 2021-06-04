@@ -5,7 +5,6 @@
 
 {% block content %}
 
-
 <body class="flex bg-gray-100 min-h-screen">
     <aside class="hidden sm:flex sm:flex-col">
         <a href="#"
@@ -309,9 +308,15 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     {{ user.phone_number }}
                                 </td>
+                                {% if request.user == user %}
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <a href="#"></a>
+                                </td>
+                                {% else %}
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <a href="{% url 'users:rate_user' pk=user.pk %}" class="text-indigo-600 hover:text-indigo-900">Rate</a>
                                 </td>
+                                {% endif %}
                             </tr>
                         </tbody>
                         {% endfor %}
