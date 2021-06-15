@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 
-{% block title %}My profile{% endblock title %}
-
 {% block content %}
+
 
 <body class="flex bg-gray-100 min-h-screen">
     <aside class="hidden sm:flex sm:flex-col">
@@ -235,242 +234,94 @@
                     </button>
                 </div>
             </div>
-            <!--Employee information-->
-            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                <div class="px-4 py-5 sm:px-6">
-                    <img class="h-10 w-10 rounded-full"
-                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
-                        alt="">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">
-                        Employee information
-                    </h3>
-                    <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                        Personal details.
-                    </p>
+            <!--SEARCH RESULTS-->
+            <section class="grid md:grid-cols-2 xl:grid-cols-1 gap-6">
+                <div class="flex items-center p-8">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Name
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Title
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Status
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Phone Number
+                                </th>
+                            </tr>
+                        </thead>
+                        {% for search in queryset %}
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10">
+                                            <img class="h-10 w-10 rounded-full"
+                                                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
+                                                alt="">
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">
+                                                <h1 href="#">{{ search.first_name }}
+                                                    {{ search.last_name }}</h1>
+                                            </div>
+                                            <div class="text-sm text-gray-500">
+                                                {{ search.email }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">{{ search.title }}</div>
+                                    <div class="text-sm text-gray-500"><a
+                                            href="{{ search.work_office.get_absolute_url }}">{{ search.work_office }}</a>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {% if user.is_active %}
+                                    <span
+                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                        Active
+                                    </span>
+                                    {% else %}
+                                    <span
+                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                        False
+                                    </span>
+                                    {% endif %}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    {{ search.phone_number }}
+                                </td>
+                                {% if request.user == search %}
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <a href="#"></a>
+                                </td>
+                                {% else %}
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <a href="{% url 'users:rate_user' pk=search.pk %}" class="text-indigo-600 hover:text-indigo-900">Rate</a>
+                                </td>
+                                {% endif %}
+                            </tr>
+                        </tbody>
+                        {% endfor %}
+                    </table>
                 </div>
-                <div class="border-t border-gray-200">
-                    <dl>
-                        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt class="text-sm font-medium text-gray-500">
-                                Full name
-                            </dt>
-                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                {{ user.first_name }} {{ user.last_name }}
-                            </dd>
-                        </div>
-                        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt class="text-sm font-medium text-gray-500">
-                                Work Office
-                            </dt>
-                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                {{ user.work_office }}
-                            </dd>
-                        </div>
-                        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt class="text-sm font-medium text-gray-500">
-                                Title
-                            </dt>
-                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                {{ user.title }}
-                            </dd>
-                        </div>
-                        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt class="text-sm font-medium text-gray-500">
-                                Email address
-                            </dt>
-                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                {{ user.email }}
-                            </dd>
-                        </div>
-                        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt class="text-sm font-medium text-gray-500">
-                                Phone number
-                            </dt>
-                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                {{ user.phone_number }}
-                            </dd>
-                        </div>
-                        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt class="text-sm font-medium text-gray-500">
-                                Rating
-                            </dt>
-                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                {{ user.phone_number }}
-                            </dd>
-                        </div>
-                        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt class="text-sm font-medium text-gray-500">
-                                Reviews
-                            </dt>
-                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                {{ user.phone_number }}
-                            </dd>
-                        </div>
-                    </dl>
-                </div>
-            </div>
-            {% comment %} AVERAGE OF ALL RATINGS {% endcomment %}
-            <div class="px-4 py-5 sm:px-6">
-                <h3 class="text-lg leading-6 font-medium text-gray-900">
-                    Employee ratings
-                </h3>
-                <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                    Average of each rating in scale from 1 to 5.
-                </p>
-            </div>
-            <div class="border-t border-gray-200">
-                <dl>
-                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">
-                            Professionalism
-                        </dt>
-                        {% if avg_rating.avg_professionalism >= 4 and avg_rating.avg_professionalism <= 5 %}
-                        <dd class="mt-1 text-sm text-green-600 sm:mt-0 sm:col-span-2">
-                            <strong>{{ avg_rating.avg_professionalism| floatformat:2  }}</strong>
-                        </dd>
-                        {% elif avg_rating.avg_professionalism > 3 and avg_rating.avg_professionalism < 4 %}
-                        <dd class="mt-1 text-sm text-yellow-400 sm:mt-0 sm:col-span-2">
-                            <strong>{{ avg_rating.avg_professionalism| floatformat:2 }}</strong>
-                        </dd>
-                        {% else %}
-                        <dd class="mt-1 text-sm text-red-600 sm:mt-0 sm:col-span-2">
-                            <strong>{{ avg_rating.avg_professionalism| floatformat:2 }}</strong>
-                        </dd>
-                        {% endif %}
-                    </div>
-                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">
-                            Teamwork
-                        </dt>
-                        {% if avg_rating.avg_teamwork >= 4 and avg_rating.avg_teamwork <= 5 %}
-                        <dd class="mt-1 text-sm text-green-600 sm:mt-0 sm:col-span-2">
-                            <strong>{{ avg_rating.avg_teamwork| floatformat:2 }}</strong>
-                        </dd>
-                        {% elif avg_rating.avg_teamwork > 3 and avg_rating.avg_teamwork < 4 %}
-                        <dd class="mt-1 text-sm text-yellow-400 sm:mt-0 sm:col-span-2">
-                            <strong>{{ avg_rating.avg_teamwork| floatformat:2 }}</strong>
-                        </dd>
-                        {% else %}
-                        <dd class="mt-1 text-sm text-red-600 sm:mt-0 sm:col-span-2">
-                            <strong>{{ avg_rating.avg_teamwork| floatformat:2 }}</strong>
-                        </dd>
-                        {% endif %}
-                    </div>
-                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">
-                            Communication
-                        </dt>
-                        {% if avg_rating.avg_rating.avg_communication >= 4 and  avg_rating.avg_rating.avg_communication <= 5%}
-                        <dd class="mt-1 text-sm text-green-600 sm:mt-0 sm:col-span-2">
-                            <strong>{{ avg_rating.avg_communication| floatformat:2 }}</strong>
-                        </dd>
-                        {% elif avg_rating.avg_communication > 3 and avg_rating.avg_communication < 4 %}
-                        <dd class="mt-1 text-sm text-yellow-400 sm:mt-0 sm:col-span-2">
-                            <strong>{{ avg_rating.avg_communication| floatformat:2 }}</strong>
-                        </dd>
-                        {% else %}
-                        <dd class="mt-1 text-sm text-red-600 sm:mt-0 sm:col-span-2">
-                            <strong>{{ avg_rating.avg_communication| floatformat:2 }}</strong>
-                        </dd>
-                        {% endif %}
-                    </div>
-                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">
-                            Organize
-                        </dt>
-                        {% if avg_rating.avg_teamwork >= 4 and avg_rating.avg_teamwork <= 5 %}
-                        <dd class="mt-1 text-sm text-green-600 sm:mt-0 sm:col-span-2">
-                            <strong>{{ avg_rating.avg_organize| floatformat:2 }}</strong>
-                        </dd>
-                        {% elif avg_rating.avg_organize > 3 and avg_rating.avg_organize < 4 %}
-                        <dd class="mt-1 text-sm text-yellow-400 sm:mt-0 sm:col-span-2">
-                            <strong>{{ avg_rating.avg_organize| floatformat:2 }}</strong>
-                        </dd>
-                        {% else %}
-                        <dd class="mt-1 text-sm text-red-600 sm:mt-0 sm:col-span-2">
-                            <strong>{{ avg_rating.avg_organize| floatformat:2 }}</strong>
-                        </dd>
-                        {% endif %}
-                    </div>
-                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">
-                            Problem solving
-                        </dt>
-                        {% if avg_rating.avg_teamwork >= 4 and avg_rating.avg_teamwork <= 5 %}
-                        <dd class="mt-1 text-sm text-green-600 sm:mt-0 sm:col-span-2">
-                            <strong>{{ avg_rating.avg_problem_solving| floatformat:2 }}</strong>
-                        </dd>
-                        {% elif avg_rating.avg_problem_solving > 3 and avg_rating.avg_problem_solving < 4 %}
-                        <dd class="mt-1 text-sm text-yellow-400 sm:mt-0 sm:col-span-2">
-                            <strong>{{ avg_rating.avg_problem_solving| floatformat:2 }}</strong>
-                        </dd>
-                        {% else %}
-                        <dd class="mt-1 text-sm text-red-600 sm:mt-0 sm:col-span-2">
-                            <strong>{{ avg_rating.avg_problem_solving| floatformat:2 }}</strong>
-                        </dd>
-                        {% endif %}
-                    </div>
-                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">
-                            Personality
-                        </dt>
-                        {% if avg_rating.avg_personality >= 4 and avg_rating.avg_personality <= 5 %}
-                        <dd class="mt-1 text-sm text-green-600 sm:mt-0 sm:col-span-2">
-                            <strong>{{ avg_rating.avg_personality| floatformat:2 }}</strong>
-                        </dd>
-                        {% elif avg_rating.avg_personality > 3 and avg_rating.avg_personality < 4 %}
-                        <dd class="mt-1 text-sm text-yellow-400 sm:mt-0 sm:col-span-2">
-                            <strong>{{ avg_rating.avg_personality| floatformat:2 }}</strong>
-                        </dd>
-                        {% else %}
-                        <dd class="mt-1 text-sm text-red-600 sm:mt-0 sm:col-span-2">
-                            <strong>{{ avg_rating.avg_personality| floatformat:2 }}</strong>
-                        </dd>
-                        {% endif %}
-                    </div>
-                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">
-                            Reliability
-                        </dt>
-                        {% if avg_rating.avg_reliability >= 4 and avg_rating.avg_reliability <= 5 %}
-                        <dd class="mt-1 text-sm text-green-600 sm:mt-0 sm:col-span-2">
-                            <strong>{{ avg_rating.avg_reliability| floatformat:2 }}</strong>
-                        </dd>
-                        {% elif avg_rating.avg_reliability > 3 and avg_rating.avg_reliability < 4 %}
-                        <dd class="mt-1 text-sm text-yellow-400 sm:mt-0 sm:col-span-2">
-                            <strong>{{ avg_rating.avg_reliability| floatformat:2 }}</strong>
-                        </dd>
-                        {% else %}
-                        <dd class="mt-1 text-sm text-red-600 sm:mt-0 sm:col-span-2">
-                            <strong>{{ avg_rating.avg_reliability| floatformat:2 }}</strong>
-                        </dd>
-                        {% endif %}
-                    </div>
-                </dl>
-            </div>
-            <div class="px-4 py-5 sm:px-6">
-                <h3 class="text-lg leading-6 font-medium text-gray-900">
-                    Employee reviews
-                </h3>
-            </div>
-            <div class="border-t border-gray-200">
-                {% for review in user_review %}
-                <dl>
-                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">
-                            Review by {{ review.reviewed_by.first_name }} {{ review.reviewed_by.last_name }}
-                            {{ review.date }}
-                        </dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {{ review.text }}
-                        </dd>
-                    </div>
-                </dl>
-                {% endfor %}
-            </div>
+            </section>
         </main>
     </div>
 </body>
+
+
+
 
 
 {% endblock content %}

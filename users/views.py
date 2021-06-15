@@ -1,4 +1,5 @@
-from django.db.models import Avg
+from ratings.views import rate_user
+from django.db.models import Avg, Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
@@ -7,18 +8,43 @@ from .forms import RegistrationForm, EditUserForm
 from .models import User, UserWorkOffice
 from ratings.models import Review
 
+# TODO SEARCH
+# TODO FILTER
+# TODO PAGINATOR for comments
+
+@login_required
+def search(request):
+    queryset = User.objects.all()
+    query = request.GET.get("q")
+    if query:
+        queryset = queryset.filter(
+            Q(first_name__icontains=query) | 
+            Q(last_name__icontains=query) | 
+            Q(title__icontains=query)
+        ).distinct()
+    context = {
+        'queryset': queryset,
+    }
+    return render(request, 'search.html', context)
+    
+
 
 @login_required
 def user_details(request, pk):
     user = get_object_or_404(User, pk=pk)
     user_review = Review.objects.filter(reviewed_user=user)
     avg_rating = Review.objects.filter(reviewed_user=user).aggregate(avg_professionalism=Avg('rate_professionalism'),
-        avg_teamwork=Avg('rate_teamwork'),
-        avg_communication=Avg('rate_communication'),
-        avg_organize=Avg('rate_communication'),
-        avg_problem_solving=Avg('rate_problem_solving'),
-        avg_personality=Avg('rate_personality'),
-        avg_reliability=Avg('rate_reliability'))
+                                                                     avg_teamwork=Avg(
+                                                                         'rate_teamwork'),
+                                                                     avg_communication=Avg(
+                                                                         'rate_communication'),
+                                                                     avg_organize=Avg(
+                                                                         'rate_communication'),
+                                                                     avg_problem_solving=Avg(
+                                                                         'rate_problem_solving'),
+                                                                     avg_personality=Avg(
+                                                                         'rate_personality'),
+                                                                     avg_reliability=Avg('rate_reliability'))
 
     context = {
         'user': user,
@@ -86,7 +112,7 @@ def register(request):
         registerForm = RegistrationForm()
     return render(request, 'users/register.html', {'form': registerForm})
 
-
+@login_required
 def edit_user(request, pk):
 
     if request.method == 'POST':

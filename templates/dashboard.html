@@ -367,6 +367,11 @@
                             Chart</div>
                     </div>
                 </div>
+                <!--SEARCH-->
+                <form class="d-flex" method='GET' action="{% url 'users:search' %}">
+                    <input type="text" name='q' class="form-control me-2" placeholder="Search" aria-label="Search">
+                    <button class="search btn btn-outline-success" type="submit">Paieška</button>
+                </form>
             </section>
         </main>
     </div>
