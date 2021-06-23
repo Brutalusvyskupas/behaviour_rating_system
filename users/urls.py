@@ -2,7 +2,7 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 
 from .views import register, users_list, list_of_offices, list_of_users_by_office, user_details, edit_user, search
-from ratings.views import rate_user
+from ratings.views import rate_user, all_ratings
 from .forms import LoginForm
 
 
@@ -16,6 +16,7 @@ urlpatterns = [
     path('offices/', list_of_offices, name='list_of_offices'),
     path('offices/<str:office_slug>/', list_of_users_by_office,
          name='list_of_users_by_office'),
+    path('statistics/', all_ratings, name='all_ratings'),
     path('users/', users_list, name='list_of_users'),
     path('users/<uuid:pk>/', user_details, name='user_details'),
     path('users/<uuid:pk>/edit_user/', edit_user, name='edit_user'),

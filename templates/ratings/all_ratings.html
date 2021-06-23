@@ -52,9 +52,9 @@
                             d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
                 </a>
-                <a href="{% url 'users:all_ratings' %}"
+                <a href="#"
                     class="inline-flex items-center justify-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg">
-                    <span class="sr-only">Statistics</span>
+                    <span class="sr-only">Dashboard</span>
                     <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -179,9 +179,9 @@
                         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
             </a>
-            <a href="{% url 'users:all_ratings' %}"
+            <a href="#"
                 class="inline-flex items-center justify-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg">
-                <span class="sr-only">Statistics</span>
+                <span class="sr-only">Dashboard</span>
                 <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -345,18 +345,18 @@
                         <!-- Refer here for full dropdown menu code: https://tailwindui.com/components/application-ui/elements/dropdowns -->
                     </div>
                     <div class="overflow-y-auto" style="max-height: 24rem;">
-                        {% for user in users  %}
+                        {% comment %} {% for user in users  %} {% endcomment %}
                         <ul class="p-6 space-y-6">
                             <li class="flex items-center">
                                 <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
                                     <img src="https://randomuser.me/api/portraits/women/82.jpg"
                                         alt="Annette Watson profile picture">
                                 </div>
-                                <span class="text-gray-600">{{ user.first_name }} {{ user.last_name }}</span>
+                                {% comment %} <span class="text-gray-600">{{ user.first_name }} {{ user.last_name }}</span> {% endcomment %}
                                 <span class="ml-auto font-semibold">9.3</span>
                             </li>
                         </ul>
-                        {% endfor %}
+                        {% comment %} {% endfor %} {% endcomment %}
                     </div>
                 </div>
                 <div class="flex flex-col row-span-3 bg-white shadow rounded-lg">
@@ -367,18 +367,364 @@
                             Chart</div>
                     </div>
                 </div>
-                <!--SEARCH-->
+                {% comment %} <!--SEARCH-->
                 <form class="d-flex" method='GET' action="{% url 'users:search' %}">
                     <input type="text" name='q' class="form-control me-2" placeholder="Search" aria-label="Search">
                     <button class="search btn btn-outline-success" type="submit">Paieška</button>
-                </form>
+                </form> {% endcomment %}
             </section>
-
-            <canvas id="myChart" width="400" height="400"></canvas>
             
+            <section class="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
+                <div class="px-6 py-5 font-semibold border-b border-gray-100">Proffesionalism
+                <canvas id="proffesionalism_chart" height='600' width='600'>Proffesionalism</canvas></div>
+                <span id='span'></span>
+                <div class="px-6 py-5 font-semibold border-b border-gray-100">Teamwork
+                <canvas id="teamwork_chart" height='600' width='600'>Teamwork</canvas></div>
+                <span id='span'></span>
+                <div class="px-6 py-5 font-semibold border-b border-gray-100">Communication
+                <canvas id="communication_chart" height='600' width='600'>Communication</canvas></div>
+                <span id='span'></span>
+                <div class="px-6 py-5 font-semibold border-b border-gray-100">Organize
+                <canvas id="organize_chart" height='600' width='600'>Organize</canvas></div>
+                <span id='span'></span>
+                <div class="px-6 py-5 font-semibold border-b border-gray-100">Problem Solving
+                <canvas id="problem_solving_chart" height='600' width='600'>Problem Solving</canvas></div>
+                <span id='span'></span>
+                <div class="px-6 py-5 font-semibold border-b border-gray-100">Personality
+                <canvas id="personality_chart" height='600' width='600'>Personality</canvas></div>
+                <span id='span'></span>
+                <div class="px-6 py-5 font-semibold border-b border-gray-100">Reliability
+                <canvas id="reliability_chart" height='600' width='600'>Reliability</canvas></div>
+                <span id='span'></span>
+            </section>
         </main>
     </div>
 </body>
 
 
 {% endblock content %}
+
+{% block scripts %}
+    {% comment %} PROFFESIONALISM CHART {% endcomment %}
+    <script>
+        $(document).ready(function () {
+            var ctx = document.getElementById('proffesionalism_chart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: [{% for user in ratings %}
+                        '{{ user.reviewed_user__first_name }} {{ user.reviewed_user__last_name }}',
+                    {% endfor %}],
+                    datasets: [{
+                        label: '# of Votes',
+                        data: [{% for rates in ratings %}
+                            {{ rates.avg_professionalism| floatformat:2 }},
+                        {% endfor %}
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    {% comment %} TEAMWORK CHART {% endcomment %}
+    <script>
+        $(document).ready(function () {
+            var ctx = document.getElementById('teamwork_chart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: [{% for user in ratings %}
+                        '{{ user.reviewed_user__first_name }} {{ user.reviewed_user__last_name }}',
+                    {% endfor %}],
+                    datasets: [{
+                        label: '# of Votes',
+                        data: [{% for rates in ratings %}
+                            {{ rates.avg_teamwork| floatformat:2 }},
+                        {% endfor %}
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    {% comment %} COMMUNICATION CHART {% endcomment %}
+    <script>
+        $(document).ready(function () {
+            var ctx = document.getElementById('communication_chart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: [{% for user in ratings %}
+                        '{{ user.reviewed_user__first_name }} {{ user.reviewed_user__last_name }}',
+                    {% endfor %}],
+                    datasets: [{
+                        label: '# of Votes',
+                        data: [{% for rates in ratings %}
+                            {{ rates.avg_communication| floatformat:2 }},
+                        {% endfor %}
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    {% comment %} ORGANIZE CHART {% endcomment %}
+    <script>
+        $(document).ready(function () {
+            var ctx = document.getElementById('organize_chart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: [{% for user in ratings %}
+                        '{{ user.reviewed_user__first_name }} {{ user.reviewed_user__last_name }}',
+                    {% endfor %}],
+                    datasets: [{
+                        label: '# of Votes',
+                        data: [{% for rates in ratings %}
+                            {{ rates.avg_organize| floatformat:2 }},
+                        {% endfor %}
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    {% comment %} PROBLEM SOLVING CHART {% endcomment %}
+    <script>
+        $(document).ready(function () {
+            var ctx = document.getElementById('problem_solving_chart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: [{% for user in ratings %}
+                        '{{ user.reviewed_user__first_name }} {{ user.reviewed_user__last_name }}',
+                    {% endfor %}],
+                    datasets: [{
+                        label: '# of Votes',
+                        data: [{% for rates in ratings %}
+                            {{ rates.avg_problem_solving| floatformat:2 }},
+                        {% endfor %}
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    {% comment %} PERSONALITY CHART {% endcomment %}
+    <script>
+        $(document).ready(function () {
+            var ctx = document.getElementById('personality_chart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: [{% for user in ratings %}
+                        '{{ user.reviewed_user__first_name }} {{ user.reviewed_user__last_name }}',
+                    {% endfor %}],
+                    datasets: [{
+                        label: '# of Votes',
+                        data: [{% for rates in ratings %}
+                            {{ rates.avg_personality| floatformat:2 }},
+                        {% endfor %}
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    {% comment %} RELIABILITY CHART {% endcomment %}
+    <script>
+        $(document).ready(function () {
+            var ctx = document.getElementById('reliability_chart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: [{% for user in ratings %}
+                        '{{ user.reviewed_user__first_name }} {{ user.reviewed_user__last_name }}',
+                    {% endfor %}],
+                    datasets: [{
+                        label: '# of Votes',
+                        data: [{% for rates in ratings %}
+                            {{ rates.avg_reliability| floatformat:2 }},
+                        {% endfor %}
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock scripts %}

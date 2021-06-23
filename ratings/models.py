@@ -40,3 +40,6 @@ class Review(models.Model):
 
     def __str__(self):
         return self.reviewed_user.first_name + " " + self.reviewed_user.last_name + " Reviewed by: " + self.reviewed_by.first_name + " " + self.reviewed_by.last_name
+
+    # def __unicode__(self):
+    #     return str(self.reviewed_user.first_name)

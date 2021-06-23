@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 # from django.contrib import messages
-
+from django.db.models import Avg, Sum
 
 from users.models import User
 from .models import Review
@@ -29,3 +29,20 @@ def rate_user(request, pk):
         form = RateForm()
 
     return render(request, 'ratings/rate.html', {'form': form, 'r_user': r_user})
+
+
+@login_required
+def all_ratings(request):
+    ratings = Review.objects.values('reviewed_user__first_name', 'reviewed_user__last_name').annotate(
+        avg_professionalism=Avg('rate_professionalism'),
+        avg_teamwork=Avg('rate_teamwork'),
+        avg_communication=Avg('rate_communication'),
+        avg_organize=Avg('rate_organize'),
+        avg_problem_solving=Avg('rate_problem_solving'),
+        avg_personality=Avg('rate_personality'),
+        avg_reliability=Avg('rate_reliability'),
+    ).order_by('reviewed_user')
+    context = {
+        'ratings': ratings,
+    }
+    return render(request, 'ratings/all_ratings.html', context)

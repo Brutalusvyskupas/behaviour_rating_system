@@ -9,6 +9,6 @@ def home(request):
     offices = UserWorkOffice.objects.order_by("office_name")
     context = {
         'users': users,
-        'offices':  offices,
+        'offices': offices,
     }
     return render(request, 'dashboard.html', context)
