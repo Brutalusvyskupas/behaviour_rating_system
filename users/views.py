@@ -2,6 +2,7 @@ from django.db.models import Avg, Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
+from django.core.paginator import Paginator
 
 from .forms import RegistrationForm, EditUserForm
 from .models import User, UserWorkOffice
@@ -11,21 +12,21 @@ from ratings.models import Review
 # TODO FILTER
 # TODO PAGINATOR for comments
 
+
 @login_required
 def search(request):
     queryset = User.objects.all()
     query = request.GET.get("q")
     if query:
         queryset = queryset.filter(
-            Q(first_name__icontains=query) | 
-            Q(last_name__icontains=query) | 
+            Q(first_name__icontains=query) |
+            Q(last_name__icontains=query) |
             Q(title__icontains=query)
         ).distinct()
     context = {
         'queryset': queryset,
     }
     return render(request, 'search.html', context)
-    
 
 
 @login_required
@@ -38,17 +39,22 @@ def user_details(request, pk):
                                                                      avg_communication=Avg(
                                                                          'rate_communication'),
                                                                      avg_organize=Avg(
-                                                                         'rate_communication'),
+                                                                         'rate_organize'),
                                                                      avg_problem_solving=Avg(
                                                                          'rate_problem_solving'),
                                                                      avg_personality=Avg(
                                                                          'rate_personality'),
                                                                      avg_reliability=Avg('rate_reliability'))
+    # PAGINATOR
+    paginator = Paginator(user_review, 3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
     context = {
         'user': user,
         'user_review': user_review,
         'avg_rating': avg_rating,
+        'page_obj': page_obj,
     }
     return render(request, 'users/user_details.html', context)
 
@@ -110,6 +116,7 @@ def register(request):
     else:
         registerForm = RegistrationForm()
     return render(request, 'users/register.html', {'form': registerForm})
+
 
 @login_required
 def edit_user(request, pk):

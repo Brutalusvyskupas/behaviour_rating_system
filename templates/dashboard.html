@@ -2,7 +2,6 @@
 
 {% block content %}
 
-
 <body class="flex bg-gray-100 min-h-screen">
     <aside class="hidden sm:flex sm:flex-col">
         <a href="#"
@@ -50,14 +49,6 @@
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                </a>
-                <a href="{% url 'users:all_ratings' %}"
-                    class="inline-flex items-center justify-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg">
-                    <span class="sr-only">Statistics</span>
-                    <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                     </svg>
                 </a>
                 <a href="#"
@@ -179,14 +170,6 @@
                         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
             </a>
-            <a href="{% url 'users:all_ratings' %}"
-                class="inline-flex items-center justify-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg">
-                <span class="sr-only">Statistics</span>
-                <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
-            </a>
             <a href="#"
                 class="inline-flex items-center justify-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg">
                 <span class="sr-only">Documents</span>
@@ -206,6 +189,16 @@
             </a>
         </div>
 
+        {% if messages %}
+
+            <div id="mydiv" class="mydiv messages flex items-center bg-blue-500 text-white text-sm font-bold px-4 py-3" role="alert">
+                <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z"/></svg>
+                {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </div>
+
+        {% endif %}
 
         <main class="p-6 sm:p-10 space-y-6">
             <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-between">
@@ -237,14 +230,14 @@
             <section class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
                 <div class="flex items-center p-8 bg-white shadow rounded-lg">
                     <div
-                        class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
+                        class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6"><a href={% url 'users:list_of_users' %}>
                         <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
-                    </div>
+                    </a></div>
                     <div>
-                        <span class="block text-2xl font-bold">62</span>
+                        <span class="block text-2xl font-bold">{{ users_count }}</span>
                         <span class="block text-gray-500">Students</span>
                     </div>
                 </div>
@@ -291,12 +284,11 @@
             </section>
             <section class="grid md:grid-cols-2 xl:grid-cols-4 xl:grid-rows-3 xl:grid-flow-col gap-6">
                 <div class="flex flex-col md:col-span-2 md:row-span-2 bg-white shadow rounded-lg">
-                    <div class="px-6 py-5 font-semibold border-b border-gray-100">The number of applied and left
-                        students per month</div>
+                    <div class="px-6 py-5 font-semibold border-b border-gray-100">Teamwork ratings</div>
                     <div class="p-4 flex-grow">
                         <div
-                            class="flex items-center justify-center h-full px-4 py-16 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">
-                            Chart</div>
+                            class="flex items-center justify-center text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">
+                            <canvas id="teamwork_chart" height='300' width='900'>Teamwork</canvas></div>
                     </div>
                 </div>
                 <div class="flex items-center p-8 bg-white shadow rounded-lg">
@@ -330,11 +322,13 @@
                 </div>
                 <div class="row-span-3 bg-white shadow rounded-lg">
                     <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
-                        <span>Students by average mark</span>
+                        <span>Top employees by overall rating</span>
+
+                        
                         <button type="button"
                             class="inline-flex justify-center rounded-md px-1 -mr-1 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-600"
                             id="options-menu" aria-haspopup="true" aria-expanded="true">
-                            Descending
+                            Ascending
                             <svg class="-mr-1 ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                 fill="currentColor">
                                 <path fill-rule="evenodd"
@@ -342,18 +336,19 @@
                                     clip-rule="evenodd" />
                             </svg>
                         </button>
+
                         <!-- Refer here for full dropdown menu code: https://tailwindui.com/components/application-ui/elements/dropdowns -->
                     </div>
                     <div class="overflow-y-auto" style="max-height: 24rem;">
-                        {% for user in users  %}
+                        {% for user in overall_ratings %}
                         <ul class="p-6 space-y-6">
                             <li class="flex items-center">
                                 <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
                                     <img src="https://randomuser.me/api/portraits/women/82.jpg"
                                         alt="Annette Watson profile picture">
                                 </div>
-                                <span class="text-gray-600">{{ user.first_name }} {{ user.last_name }}</span>
-                                <span class="ml-auto font-semibold">9.3</span>
+                                <span class="text-gray-600">{{ user.reviewed_user__first_name }} {{ user.reviewed_user__last_name }}</span>
+                                <span class="ml-auto font-semibold">{{ user.all| floatformat:2 }}</span>
                             </li>
                         </ul>
                         {% endfor %}
@@ -367,14 +362,36 @@
                             Chart</div>
                     </div>
                 </div>
-                <!--SEARCH-->
+                {% comment %} <!--SEARCH-->
                 <form class="d-flex" method='GET' action="{% url 'users:search' %}">
                     <input type="text" name='q' class="form-control me-2" placeholder="Search" aria-label="Search">
                     <button class="search btn btn-outline-success" type="submit">Paieška</button>
-                </form>
+                </form> {% endcomment %}
             </section>
 
-            <canvas id="myChart" width="400" height="400"></canvas>
+            <section class="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
+                <div class="px-6 py-5 font-semibold border-b border-gray-100">Proffesionalism
+                <canvas id="proffesionalism_chart" height='600' width='600'>Proffesionalism</canvas></div>
+                <span id='span'></span>
+                <div class="px-6 py-5 font-semibold border-b border-gray-100">Teamwork
+                <canvas id="teamwork_chart" height='600' width='600'>Teamwork</canvas></div>
+                <span id='span'></span>
+                <div class="px-6 py-5 font-semibold border-b border-gray-100">Communication
+                <canvas id="communication_chart" height='600' width='600'>Communication</canvas></div>
+                <span id='span'></span>
+                <div class="px-6 py-5 font-semibold border-b border-gray-100">Organize
+                <canvas id="organize_chart" height='600' width='600'>Organize</canvas></div>
+                <span id='span'></span>
+                <div class="px-6 py-5 font-semibold border-b border-gray-100">Problem Solving
+                <canvas id="problem_solving_chart" height='600' width='600'>Problem Solving</canvas></div>
+                <span id='span'></span>
+                <div class="px-6 py-5 font-semibold border-b border-gray-100">Personality
+                <canvas id="personality_chart" height='600' width='600'>Personality</canvas></div>
+                <span id='span'></span>
+                <div class="px-6 py-5 font-semibold border-b border-gray-100">Reliability
+                <canvas id="reliability_chart" height='600' width='600'>Reliability</canvas></div>
+                <span id='span'></span>
+            </section>
             
         </main>
     </div>
@@ -382,3 +399,338 @@
 
 
 {% endblock content %}
+
+{% block scripts %}
+    {% comment %} SUCCESS MESSAGE FADEOUT {% endcomment %}
+    <script>
+        var fade_out = function() {
+        $("#mydiv").fadeOut();
+        }
+
+        setTimeout(fade_out, 5000);
+    </script>
+
+
+    {% comment %} PROFFESIONALISM CHART {% endcomment %}
+    <script>
+        $(document).ready(function () {
+            var ctx = document.getElementById('proffesionalism_chart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: [{% for user in ratings %}
+                        '{{ user.reviewed_user__first_name }} {{ user.reviewed_user__last_name }}',
+                    {% endfor %}],
+                    datasets: [{
+                        label: '',
+                        data: [{% for rates in ratings %}
+                            {{ rates.avg_professionalism| floatformat:2 }},
+                        {% endfor %}
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    {% comment %} TEAMWORK CHART {% endcomment %}
+    <script>
+        $(document).ready(function () {
+            var ctx = document.getElementById('teamwork_chart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'polarArea',
+                data: {
+                    labels: [{% for user in ratings %}
+                        '{{ user.reviewed_user__first_name }} {{ user.reviewed_user__last_name }}',
+                    {% endfor %}],
+                    datasets: [{
+                        label: '',
+                        data: [{% for rates in ratings %}
+                            {{ rates.avg_teamwork| floatformat:2 }},
+                        {% endfor %}
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    {% comment %} COMMUNICATION CHART {% endcomment %}
+    <script>
+        $(document).ready(function () {
+            var ctx = document.getElementById('communication_chart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: [{% for user in ratings %}
+                        '{{ user.reviewed_user__first_name }} {{ user.reviewed_user__last_name }}',
+                    {% endfor %}],
+                    datasets: [{
+                        label: '',
+                        data: [{% for rates in ratings %}
+                            {{ rates.avg_communication| floatformat:2 }},
+                        {% endfor %}
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    {% comment %} ORGANIZE CHART {% endcomment %}
+    <script>
+        $(document).ready(function () {
+            var ctx = document.getElementById('organize_chart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: [{% for user in ratings %}
+                        '{{ user.reviewed_user__first_name }} {{ user.reviewed_user__last_name }}',
+                    {% endfor %}],
+                    datasets: [{
+                        label: '',
+                        data: [{% for rates in ratings %}
+                            {{ rates.avg_organize| floatformat:2 }},
+                        {% endfor %}
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    {% comment %} PROBLEM SOLVING CHART {% endcomment %}
+    <script>
+        $(document).ready(function () {
+            var ctx = document.getElementById('problem_solving_chart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: [{% for user in ratings %}
+                        '{{ user.reviewed_user__first_name }} {{ user.reviewed_user__last_name }}',
+                    {% endfor %}],
+                    datasets: [{
+                        label: '',
+                        data: [{% for rates in ratings %}
+                            {{ rates.avg_problem_solving| floatformat:2 }},
+                        {% endfor %}
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    {% comment %} PERSONALITY CHART {% endcomment %}
+    <script>
+        $(document).ready(function () {
+            var ctx = document.getElementById('personality_chart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: [{% for user in ratings %}
+                        '{{ user.reviewed_user__first_name }} {{ user.reviewed_user__last_name }}',
+                    {% endfor %}],
+                    datasets: [{
+                        label: '',
+                        data: [{% for rates in ratings %}
+                            {{ rates.avg_personality| floatformat:2 }},
+                        {% endfor %}
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    {% comment %} RELIABILITY CHART {% endcomment %}
+    <script>
+        $(document).ready(function () {
+            var ctx = document.getElementById('reliability_chart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: [{% for user in ratings %}
+                        '{{ user.reviewed_user__first_name }} {{ user.reviewed_user__last_name }}',
+                    {% endfor %}],
+                    datasets: [{
+                        label: '',
+                        data: [{% for rates in ratings %}
+                            {{ rates.avg_reliability| floatformat:2 }},
+                        {% endfor %}
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock scripts %}

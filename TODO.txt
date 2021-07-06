@@ -1,8 +1,21 @@
-- Users (roles)
-- Offices 
-- Category (by sectors, offices)
-- Rating (with a review), tags (open minded, friendly, etc) https://www.youtube.com/watch?v=dZywiX-Glu4
-- Charts (by rating, tags) https://www.youtube.com/watch?v=1OL5n06kO_w
-    - Number of votes (vertical), tags (horizontal)
+- Users (roles)- DONE
+- Offices - DONE
+- Category (by sectors, offices) - DONE
+- Rating (with a review), tags (open minded, friendly, etc) - DONE
+- Charts (by rating, tags) https://www.youtube.com/watch?v=1OL5n06kO_w- DONE
+    - Number of votes (vertical), tags (horizontal) - DONE
 
 - User dashboard (Ratings about you, dots through time, pool mentions, reviews ) https://www.youtube.com/watch?v=HU6FWSxNrtw
+
+- Create UserProfile model (with additional field).????
+- Filter users by rating (main page)
+- Search sutvarkyti
+- Admin created users can't login
+- Pagination for reviews (profile page, users list) - DONE
+- Redirect user to homepage after submission of ratings with message (you reviews has been submitted) - DONE
+- User can only rate other user one time each week
+- Main dashboard:
+    - Number of students (number of users) - DONE
+    - Students by average mark(users by average market of specific skill) 
+    - Users total average of all specific skills combined - DONE
+    - Underperforming students (underperforming percentage)
