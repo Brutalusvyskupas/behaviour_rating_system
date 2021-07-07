@@ -110,7 +110,7 @@ def register(request):
             user.set_password(registerForm.cleaned_data['password'])
             user.is_active = True
             user.save()
-            registerForm.save_m2m()
+            # registerForm.save_m2m()
             login(request, user)
             return redirect("/home")
     else:

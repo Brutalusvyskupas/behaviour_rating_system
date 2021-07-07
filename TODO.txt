@@ -7,13 +7,14 @@
 
 - User dashboard (Ratings about you, dots through time, pool mentions, reviews ) https://www.youtube.com/watch?v=HU6FWSxNrtw
 
-- Create UserProfile model (with additional field).????
+- Templates refactoring - DONE
 - Filter users by rating (main page)
-- Search sutvarkyti
+- Search sutvarkyti - DONE
 - Admin created users can't login
 - Pagination for reviews (profile page, users list) - DONE
 - Redirect user to homepage after submission of ratings with message (you reviews has been submitted) - DONE
-- User can only rate other user one time each week
+- User can only rate other user one time each week - DONE
+- Fix "Top employees by overall rating" ascending/descending
 - Main dashboard:
     - Number of students (number of users) - DONE
     - Students by average mark(users by average market of specific skill) 

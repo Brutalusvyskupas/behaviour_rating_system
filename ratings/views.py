@@ -1,8 +1,11 @@
+from datetime import time
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.utils import timezone
 
 from users.models import User
+from .models import Review
 from .forms import RateForm
 
 
@@ -15,6 +18,12 @@ def rate_user(request, pk):
     #     return redirect('users:list_of_users')
 
     if request.method == 'POST':
+        # Restriction reviewing user once a week
+        timeline = timezone.now() - timezone.timedelta(days=1)
+        if Review.objects.filter(reviewed_user=r_user, date__gt=timeline).exists():
+            messages.success(
+                request, 'You already reviewed this user! You can review user once a week.')
+            return HttpResponseRedirect('/home/')
         form = RateForm(request.POST)
         if form.is_valid():
             review = form.save(commit=False)

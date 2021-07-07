@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
     <link rel="stylesheet" href="{% static 'js/custom.js' %}">
-    
+
 </head>
 
 <body>
@@ -29,6 +29,8 @@
 
     {% block scripts %}
     {% endblock scripts %}
+    
+    {% include 'dashboard_nav.html' %}
 
     {% block content%}
     {% endblock content %}

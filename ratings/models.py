@@ -38,6 +38,9 @@ class Review(models.Model):
     likes = models.PositiveIntegerField(default=0)
     unlikes = models.PositiveIntegerField(default=0)
 
+    # class Meta:
+    #     unique_together = (('reviewed_by', 'date'),)
+
     def __str__(self):
         return self.reviewed_user.first_name + " " + self.reviewed_user.last_name + " Reviewed by: " + self.reviewed_by.first_name + " " + self.reviewed_by.last_name
 
