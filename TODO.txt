@@ -13,10 +13,10 @@
 - Admin created users can't login
 - Pagination for reviews (profile page, users list) - DONE
 - Redirect user to homepage after submission of ratings with message (you reviews has been submitted) - DONE
-- User can only rate other user one time each week - DONE
-- Fix "Top employees by overall rating" ascending/descending
+- User can only rate other user one time each week(by the time of production change it to 7 days) - DONE
 - Main dashboard:
     - Number of students (number of users) - DONE
-    - Students by average mark(users by average market of specific skill) 
+    - Students by average mark(users by average mark of specific skill) - DONE
     - Users total average of all specific skills combined - DONE
     - Underperforming students (underperforming percentage)
+    - Top attributes by average rating

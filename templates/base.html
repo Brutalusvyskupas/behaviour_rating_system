@@ -30,7 +30,11 @@
     {% block scripts %}
     {% endblock scripts %}
     
-    {% include 'dashboard_nav.html' %}
+    {% block dashboard_nav %}
+        {% include 'dashboard_nav.html' %}
+    {% endblock dashboard_nav %}
+
+
 
     {% block content%}
     {% endblock content %}

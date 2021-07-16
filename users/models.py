@@ -36,6 +36,7 @@ class UserAccountManager(BaseUserManager):
 class UserWorkOffice(models.Model):
     office_name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=30, unique=True)
+    # office_pic
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.office_name)
@@ -85,4 +86,3 @@ class User(AbstractBaseUser, PermissionsMixin):
         return reverse('users:user_details', kwargs={
             'pk': self.pk
         })
-    

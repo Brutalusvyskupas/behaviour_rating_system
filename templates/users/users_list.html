@@ -5,6 +5,19 @@
 
 {% block content %}
 
+{% if messages %}
+
+
+<div id="mydiv" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+  <strong class="font-bold">Attention!</strong>
+  {% for message in messages %}
+  <span {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</span>
+  {% endfor %}
+</div>
+
+
+{% endif %}
+
 <body class="flex bg-gray-100 min-h-screen">
     <main class="p-6 sm:p-10 space-y-6">
         <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-between">
@@ -116,3 +129,7 @@
 
 
 {% endblock content %}
+
+{% block scripts %}
+    {% include 'charts_scripts.html' %}
+{% endblock scripts%}
