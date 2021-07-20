@@ -41,9 +41,15 @@ def user_details(request, pk):
                                                                          'rate_problem_solving'),
                                                                      avg_personality=Avg(
                                                                          'rate_personality'),
-                                                                     avg_reliability=Avg('rate_reliability'))
+                                                                     avg_reliability=Avg(
+                                                                         'rate_reliability'),
+                                                                     avg_honesty_integrity=Avg(
+                                                                         'rate_honesty_integrity'),
+                                                                     avg_emotional_intelligence=Avg(
+                                                                         'rate_emotional_intelligence'),
+                                                                     avg_willingness_to_learn=Avg('rate_willingness_to_learn'))
     # PAGINATOR
-    paginator = Paginator(user_review, 3)
+    paginator = Paginator(user_review, 1)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -59,8 +65,15 @@ def user_details(request, pk):
 @login_required
 def users_list(request):
     offices = UserWorkOffice.objects.all()
+
+    # PAGINATOR
+    paginator = Paginator(offices, 1)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
         'offices': offices,
+        'page_obj': page_obj,
     }
     return render(request, 'users/users_list.html', context)
 

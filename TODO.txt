@@ -14,7 +14,7 @@
 - Pagination for reviews (profile page, users list) - DONE
 - Redirect user to homepage after submission of ratings with message (you reviews has been submitted) - DONE
 - User can only rate other user one time each week(by the time of production change it to 7 days) - DONE
-- Pagination for list of users.
+- Pagination for list of users - DONE
 - Main dashboard:
     - Number of students (number of users) - DONE
     - Students by average mark(users by average mark of specific skill) - DONE

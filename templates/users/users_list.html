@@ -61,7 +61,7 @@
                             </th>
                         </tr>
                     </thead>
-                    {% for office in offices %}
+                    {% for office in page_obj %}
                     {% for user in office.user_set.all %}
                     <tbody class="bg-white divide-y divide-gray-200">
                         <tr>
@@ -121,6 +121,54 @@
                     {% endfor %}
                 </table>
             </div>
+
+            <div class="flex flex-col items-center my-12">
+                <div class="flex text-gray-700">
+                    {% if page_obj.has_previous %}
+
+                    <div class="h-12 w-12 mr-1 flex justify-center items-center rounded-full bg-gray-200 cursor-pointer">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-chevron-left w-6 h-6">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+                    <div class="flex h-12 font-medium rounded-full bg-gray-200">
+                        {% if page_obj.number == num %}
+                        <div
+                            class="w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded-full bg-teal-600 text-white">
+                            <a class="w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded-full"
+                                href="?page={{ num }}">{{ num }}</a></div>
+                        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                        <div
+                            class="w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded-full">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a></div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+
+
+                    {% if page_obj.has_next %}
+                    <div class="h-12 w-12 ml-1 flex justify-center items-center rounded-full bg-gray-200 cursor-pointer">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-chevron-right w-6 h-6">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+
         </section>
     </main>
     </div>
@@ -130,6 +178,3 @@
 
 {% endblock content %}
 
-{% block scripts %}
-    {% include 'charts_scripts.html' %}
-{% endblock scripts%}

@@ -69,7 +69,7 @@
                         </a></div>
                     <div>
                         <span class="block text-2xl font-bold">{{ users_count|users_count }}</span>
-                        <span class="block text-gray-500">Employees</span>
+                        <span class="block text-gray-500">Employees(active)</span>
                     </div>
                 </div>
                 <div class="flex items-center p-8 bg-white shadow rounded-lg">
@@ -81,8 +81,9 @@
                         </svg>
                     </div>
                     <div>
-                        <span class="block text-2xl font-bold">6.8</span>
-                        <span class="block text-gray-500">Average mark</span>
+                        <span class="inline-block text-2xl font-bold">{{overperforming_users_count|overperforming_users_count}}</span>
+                        <span class="inline-block text-xl text-gray-500 font-semibold">({{overperforming_users_percentage|overperforming_users_percentage}}%)</span>
+                        <span class="block text-gray-500">Overperforming employees</span>
                     </div>
                 </div>
                 <div class="flex items-center p-8 bg-white shadow rounded-lg">
@@ -116,6 +117,7 @@
             <section class="grid md:grid-cols-2 xl:grid-cols-4 xl:grid-rows-3 xl:grid-flow-col gap-6">
                 <div class="flex flex-col md:col-span-2 md:row-span-2 bg-white shadow rounded-lg">
                     <div class="px-6 py-5 font-semibold border-b border-gray-100">Top attributes</div>
+           
 
                 </div>
                 <div class="flex items-center p-8 bg-white shadow rounded-lg">
@@ -226,5 +228,5 @@
 {% endblock content %}
 
 {% block scripts %}
-{% include 'charts_scripts.html' %}
+    {% include 'ratings/charts_scripts.html' %}
 {% endblock scripts%}
