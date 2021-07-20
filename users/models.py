@@ -76,6 +76,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ["first_name"]
 
     class Meta:
+        ordering = ('first_name',)
         verbose_name = "Users"
         verbose_name_plural = "Users"
 

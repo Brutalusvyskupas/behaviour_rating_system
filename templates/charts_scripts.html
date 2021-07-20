@@ -1,4 +1,7 @@
 {% block scripts %}
+
+{% load ratings_filters %}
+
     {% comment %} SUCCESS MESSAGE FADEOUT {% endcomment %}
     <script>
         var fade_out = function() {
@@ -16,12 +19,12 @@
             var myChart = new Chart(ctx, {
                 type: 'pie',
                 data: {
-                    labels: [{% for user in ratings %}
+                    labels: [{% for user in avg_user_rating|avg_user_rating %}
                         '{{ user.reviewed_user__first_name }} {{ user.reviewed_user__last_name }}',
                     {% endfor %}],
                     datasets: [{
                         label: '',
-                        data: [{% for rates in ratings %}
+                        data: [{% for rates in avg_user_rating|avg_user_rating %}
                             {{ rates.avg_professionalism| floatformat:2 }},
                         {% endfor %}
                         ],
@@ -62,12 +65,12 @@
             var myChart = new Chart(ctx, {
                 type: 'pie',
                 data: {
-                    labels: [{% for user in ratings %}
+                    labels: [{% for user in avg_user_rating|avg_user_rating %}
                         '{{ user.reviewed_user__first_name }} {{ user.reviewed_user__last_name }}',
                     {% endfor %}],
                     datasets: [{
                         label: '',
-                        data: [{% for rates in ratings %}
+                        data: [{% for rates in avg_user_rating|avg_user_rating %}
                             {{ rates.avg_teamwork| floatformat:2 }},
                         {% endfor %}
                         ],
@@ -108,12 +111,12 @@
             var myChart = new Chart(ctx, {
                 type: 'pie',
                 data: {
-                    labels: [{% for user in ratings %}
+                    labels: [{% for user in avg_user_rating|avg_user_rating %}
                         '{{ user.reviewed_user__first_name }} {{ user.reviewed_user__last_name }}',
                     {% endfor %}],
                     datasets: [{
                         label: '',
-                        data: [{% for rates in ratings %}
+                        data: [{% for rates in avg_user_rating|avg_user_rating %}
                             {{ rates.avg_communication| floatformat:2 }},
                         {% endfor %}
                         ],
@@ -154,12 +157,12 @@
             var myChart = new Chart(ctx, {
                 type: 'pie',
                 data: {
-                    labels: [{% for user in ratings %}
+                    labels: [{% for user in avg_user_rating|avg_user_rating %}
                         '{{ user.reviewed_user__first_name }} {{ user.reviewed_user__last_name }}',
                     {% endfor %}],
                     datasets: [{
                         label: '',
-                        data: [{% for rates in ratings %}
+                        data: [{% for rates in avg_user_rating|avg_user_rating %}
                             {{ rates.avg_organize| floatformat:2 }},
                         {% endfor %}
                         ],
@@ -200,12 +203,12 @@
             var myChart = new Chart(ctx, {
                 type: 'pie',
                 data: {
-                    labels: [{% for user in ratings %}
+                    labels: [{% for user in avg_user_rating|avg_user_rating %}
                         '{{ user.reviewed_user__first_name }} {{ user.reviewed_user__last_name }}',
                     {% endfor %}],
                     datasets: [{
                         label: '',
-                        data: [{% for rates in ratings %}
+                        data: [{% for rates in avg_user_rating|avg_user_rating %}
                             {{ rates.avg_problem_solving| floatformat:2 }},
                         {% endfor %}
                         ],
@@ -246,12 +249,12 @@
             var myChart = new Chart(ctx, {
                 type: 'pie',
                 data: {
-                    labels: [{% for user in ratings %}
+                    labels: [{% for user in avg_user_rating|avg_user_rating %}
                         '{{ user.reviewed_user__first_name }} {{ user.reviewed_user__last_name }}',
                     {% endfor %}],
                     datasets: [{
                         label: '',
-                        data: [{% for rates in ratings %}
+                        data: [{% for rates in avg_user_rating|avg_user_rating %}
                             {{ rates.avg_personality| floatformat:2 }},
                         {% endfor %}
                         ],
@@ -292,13 +295,151 @@
             var myChart = new Chart(ctx, {
                 type: 'pie',
                 data: {
-                    labels: [{% for user in ratings %}
+                    labels: [{% for user in avg_user_rating|avg_user_rating %}
                         '{{ user.reviewed_user__first_name }} {{ user.reviewed_user__last_name }}',
                     {% endfor %}],
                     datasets: [{
                         label: '',
-                        data: [{% for rates in ratings %}
+                        data: [{% for rates in avg_user_rating|avg_user_rating %}
                             {{ rates.avg_reliability| floatformat:2 }},
+                        {% endfor %}
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    {% comment %} HONEST AND INTEGRITY CHART {% endcomment %}
+    <script>
+        $(document).ready(function () {
+            var ctx = document.getElementById('honesty_integrity_chart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: [{% for user in avg_user_rating|avg_user_rating %}
+                        '{{ user.reviewed_user__first_name }} {{ user.reviewed_user__last_name }}',
+                    {% endfor %}],
+                    datasets: [{
+                        label: '',
+                        data: [{% for rates in avg_user_rating|avg_user_rating %}
+                            {{ rates.avg_honesty_integrity| floatformat:2 }},
+                        {% endfor %}
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    {% comment %} EMOTIONAL INTELLIGENCE CHART {% endcomment %}
+    <script>
+        $(document).ready(function () {
+            var ctx = document.getElementById('emotional_intelligence_chart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: [{% for user in avg_user_rating|avg_user_rating %}
+                        '{{ user.reviewed_user__first_name }} {{ user.reviewed_user__last_name }}',
+                    {% endfor %}],
+                    datasets: [{
+                        label: '',
+                        data: [{% for rates in avg_user_rating|avg_user_rating %}
+                            {{ rates.avg_emotional_intelligence| floatformat:2 }},
+                        {% endfor %}
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    {% comment %} EMOTIONAL INTELLIGENCE CHART {% endcomment %}
+    <script>
+        $(document).ready(function () {
+            var ctx = document.getElementById('willingness_to_learn_chart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: [{% for user in avg_user_rating|avg_user_rating %}
+                        '{{ user.reviewed_user__first_name }} {{ user.reviewed_user__last_name }}',
+                    {% endfor %}],
+                    datasets: [{
+                        label: '',
+                        data: [{% for rates in avg_user_rating|avg_user_rating %}
+                            {{ rates.avg_willingness_to_learn| floatformat:2 }},
                         {% endfor %}
                         ],
                         backgroundColor: [

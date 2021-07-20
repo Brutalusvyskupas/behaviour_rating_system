@@ -2,6 +2,8 @@
 
 {% block content %}
 
+{% load ratings_filters %}
+
 <body class="flex bg-gray-100 min-h-screen">
 
 
@@ -66,8 +68,8 @@
                             </svg>
                         </a></div>
                     <div>
-                        <span class="block text-2xl font-bold">{{ users_count }}</span>
-                        <span class="block text-gray-500">Students</span>
+                        <span class="block text-2xl font-bold">{{ users_count|users_count }}</span>
+                        <span class="block text-gray-500">Employees</span>
                     </div>
                 </div>
                 <div class="flex items-center p-8 bg-white shadow rounded-lg">
@@ -92,9 +94,9 @@
                         </svg>
                     </div>
                     <div>
-                        <span class="inline-block text-2xl font-bold">9</span>
-                        <span class="inline-block text-xl text-gray-500 font-semibold">(14%)</span>
-                        <span class="block text-gray-500">Underperforming students</span>
+                        <span class="inline-block text-2xl font-bold">{{under_performing_users_count|underperforming_users_count}}</span>
+                        <span class="inline-block text-xl text-gray-500 font-semibold">({{underperforming_users_percentage|underperforming_users_percentage}}%)</span>
+                        <span class="block text-gray-500">Underperforming employees</span>
                     </div>
                 </div>
                 <div class="flex items-center p-8 bg-white shadow rounded-lg">
@@ -152,7 +154,7 @@
                         <!-- Refer here for full dropdown menu code: https://tailwindui.com/components/application-ui/elements/dropdowns -->
                     </div>
                     <div class="overflow-y-auto" style="max-height: 24rem;">
-                        {% for user in overall_ratings %}
+                        {% for user in users_overall_rating|users_overall_rating %}
                         <ul class="p-6 space-y-6">
                             <li class="flex items-center">
                                 <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
@@ -169,7 +171,7 @@
                 </div>
                 <div class="flex flex-col row-span-3 bg-white shadow rounded-lg">
                     <div class="px-6 py-5 font-semibold border-b border-gray-100">Top performing offices</div>
-                    {% for office in offices_performance %}
+                    {% for office in top_performing_offices|top_performing_offices %}
                         <ul class="p-6 space-y-6">
                             <li class="flex items-center">
                                 <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
@@ -205,6 +207,14 @@
                 <span id='span'></span>
                 <div class="px-6 py-5 font-semibold border-b border-gray-100">Reliability
                     <canvas id="reliability_chart" height='600' width='600'>Reliability</canvas></div>
+                <span id='span'></span>
+                <div class="px-6 py-5 font-semibold border-b border-gray-100">Honesty and integrity
+                    <canvas id="honesty_integrity_chart" height='600' width='600'>Honesty and integrity</canvas></div>
+                <span id='span'></span><div class="px-6 py-5 font-semibold border-b border-gray-100">Emotional Intelligence
+                    <canvas id="emotional_intelligence_chart" height='600' width='600'>Emotional Intelligence</canvas></div>
+                <span id='span'></span>
+                <div class="px-6 py-5 font-semibold border-b border-gray-100">Willingness to learn
+                    <canvas id="willingness_to_learn_chart" height='600' width='600'>Willingness to learn</canvas></div>
                 <span id='span'></span>
             </section>
 

@@ -21,19 +21,25 @@ class Review(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     text = models.TextField(max_length=3000, blank=True)
     rate_professionalism = models.IntegerField(
-        validators=[MinValueValidator(1), MaxValueValidator(5)])  # unique = True
+        validators=[MinValueValidator(1), MaxValueValidator(10)])  # unique = True
     rate_teamwork = models.IntegerField(
-        validators=[MinValueValidator(1), MaxValueValidator(5)])
+        validators=[MinValueValidator(1), MaxValueValidator(10)])
     rate_communication = models.IntegerField(
-        validators=[MinValueValidator(1), MaxValueValidator(5)])
+        validators=[MinValueValidator(1), MaxValueValidator(10)])
     rate_organize = models.IntegerField(
-        validators=[MinValueValidator(1), MaxValueValidator(5)])
+        validators=[MinValueValidator(1), MaxValueValidator(10)])
     rate_problem_solving = models.IntegerField(
-        validators=[MinValueValidator(1), MaxValueValidator(5)])
+        validators=[MinValueValidator(1), MaxValueValidator(10)])
     rate_personality = models.IntegerField(
-        validators=[MinValueValidator(1), MaxValueValidator(5)])
+        validators=[MinValueValidator(1), MaxValueValidator(10)])
     rate_reliability = models.IntegerField(
-        validators=[MinValueValidator(1), MaxValueValidator(5)])
+        validators=[MinValueValidator(1), MaxValueValidator(10)])
+    rate_honesty_integrity = models.IntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(10)])
+    rate_emotional_intelligence = models.IntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(10)])
+    rate_willingness_to_learn = models.IntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(10)])
     likes = models.PositiveIntegerField(default=0)
     unlikes = models.PositiveIntegerField(default=0)
 
