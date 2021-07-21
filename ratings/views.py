@@ -44,3 +44,5 @@ def rate_user(request, pk):
         form = RateForm()
 
     return render(request, 'ratings/rate.html', {'form': form, 'r_user': r_user})
+
+    

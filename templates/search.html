@@ -9,10 +9,10 @@
     {% if messages %}
 
     <div id="mydiv" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-    <strong class="font-bold">Attention!</strong>
-    {% for message in messages %}
-    <span {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</span>
-    {% endfor %}
+        <strong class="font-bold">Attention!</strong>
+        {% for message in messages %}
+        <span {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</span>
+        {% endfor %}
     </div>
 
     {% endif %}
@@ -126,6 +126,13 @@
                                     class="text-indigo-600 hover:text-indigo-900">Rate</a>
                             </td>
                             {% endif %}
+
+                            {% if request.user.is_staff %}
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <a href="{% url 'users:user_details' pk=user.pk %}"
+                                    class="text-indigo-600 hover:text-indigo-900">View profile</a>
+                            </td>
+                            {% endif %}
                         </tr>
                     </tbody>
                     {% endfor %}
@@ -138,4 +145,3 @@
 
 
 {% endblock content %}
-

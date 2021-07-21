@@ -1,5 +1,5 @@
-from django.db.models import Avg, Q
-from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Avg, Q, F
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from django.core.paginator import Paginator
@@ -48,8 +48,23 @@ def user_details(request, pk):
                                                                      avg_emotional_intelligence=Avg(
                                                                          'rate_emotional_intelligence'),
                                                                      avg_willingness_to_learn=Avg('rate_willingness_to_learn'))
+
+    overall_rating = Review.objects.filter(reviewed_user=user).aggregate(
+        overall_avg=Avg(
+            F('rate_professionalism')
+            + F('rate_teamwork')
+            + F('rate_communication')
+            + F('rate_organize')
+            + F('rate_problem_solving')
+            + F('rate_personality')
+            + F('rate_reliability')
+            + F('rate_honesty_integrity')
+            + F('rate_emotional_intelligence')
+            + F('rate_willingness_to_learn')
+        ))
+
     # PAGINATOR
-    paginator = Paginator(user_review, 1)
+    paginator = Paginator(user_review, 8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -58,6 +73,7 @@ def user_details(request, pk):
         'user_review': user_review,
         'avg_rating': avg_rating,
         'page_obj': page_obj,
+        'overall_rating': overall_rating,
     }
     return render(request, 'users/user_details.html', context)
 
@@ -141,3 +157,4 @@ def edit_user(request, pk):
         editForm = EditUserForm(instance=request.user)
 
     return render(request, 'users/edit_user.html', {'form': editForm})
+

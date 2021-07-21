@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
+{% load ratings_filters %}
 
 {% block title %}My profile{% endblock title %}
 
 {% block content %}
+
 
 <body class="flex bg-gray-100 min-h-screen">
     <main class="p-6 sm:p-10 space-y-6">
@@ -96,18 +98,30 @@
                     </div>
                     <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
-                            Rating
+                            Overall rating
                         </dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {{ user.phone_number }}
+
+                        {% if overall_rating.overall_avg > 80 %}
+                        <dd class="mt-1 text-sm text-green-600 sm:mt-0 sm:col-span-2">
+                            <strong>{{ overall_rating.overall_avg|floatformat:2 }}</strong>
                         </dd>
+                        {% elif overall_rating.overall_avg <= 80 and overall_rating.overall_avg >= 50 %}
+                        <dd class="mt-1 text-sm text-yellow-600 sm:mt-0 sm:col-span-2">
+                            <strong>{{ overall_rating.overall_avg|floatformat:2 }}</strong>
+                        </dd>
+                        {% else %}
+                        <dd class="mt-1 text-sm text-red-600 sm:mt-0 sm:col-span-2">
+                            <strong>{{ overall_rating.overall_avg|floatformat:2 }}</strong>
+                        </dd>
+                        {% endif %}
+
                     </div>
                     <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
-                            Reviews
+                            Active since
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {{ user.phone_number }}
+                            {{ user.created }}
                         </dd>
                     </div> 
                 </dl>
@@ -324,6 +338,11 @@
                     </dd>
                 </div>
             </dl>
+            {% comment %} <a href="{% url 'users:edit_user_txt_review' pk=user.pk %}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+            </a> {% endcomment %}
             {% endfor %}
         </div>
 
