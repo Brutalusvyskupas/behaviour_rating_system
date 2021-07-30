@@ -43,3 +43,11 @@ class RateForm(forms.ModelForm):
             'rate_emotional_intelligence',
             'rate_willingness_to_learn',
         )
+
+class EditCommentForm(forms.ModelForm):
+    text = forms.CharField(min_length=50, widget=forms.Textarea(attrs={"class": "block w-full p-3 rounded bg-gray-200 border border-transparent focus:outline-none",
+                                                                       "placeholder": "Review"}), required=True)
+
+    class Meta:
+        model = Review
+        fields = ('text',) 

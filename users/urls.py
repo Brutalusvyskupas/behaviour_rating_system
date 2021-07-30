@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 
-from .views import register, users_list, list_of_offices, list_of_users_by_office, user_details, edit_user, search
+from .views import register, users_list, list_of_offices, list_of_users_by_office, user_details, edit_user, search, edit_comment
 from ratings.views import rate_user
 from .forms import LoginForm
 
@@ -19,6 +19,7 @@ urlpatterns = [
     path('users/', users_list, name='list_of_users'),
     path('users/<uuid:pk>/', user_details, name='user_details'),
     path('users/<uuid:pk>/edit_user/', edit_user, name='edit_user'),
+    path('users/<int:pk>/edit_comment/', edit_comment, name='edit_comment'),
     path('users/<uuid:pk>/rate/', rate_user, name='rate_user'),
     path('register/', register, name="register"),
 ]

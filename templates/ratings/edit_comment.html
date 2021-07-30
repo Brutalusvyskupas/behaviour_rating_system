@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit text comment{% endblock title %}
+
+{% block content %}
+
+<body class="flex bg-gray-100 min-h-screen">
+    <main class="p-6 sm:p-10 space-y-6">
+        <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-between">
+            <div class="mr-6">
+                <h1 class="text-4xl font-semibold mb-2">Dashboard</h1>
+                <h2 class="text-gray-600 ml-0.5">Mobile UX/UI Design course</h2>
+            </div>
+        </div>
+        <!--Employee information-->
+        <form method="post">
+            {% csrf_token %}
+            {% if form.errors %}
+            <p>Please correct the following errors:</p>
+            {% for field in form %}
+            {% if field.errors %}
+            <div class="alert alert-primary" role="alert">
+                {{ field.label }}: {{ field.errors|striptags }}
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                <div class="px-4 py-5 sm:px-6">
+                    <img class="h-10 w-10 rounded-full"
+                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
+                        alt="">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                        Edit text comment
+                    </h3>
+                    <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                        Text comment
+                    </p>
+                </div>
+                <div class="border-t border-gray-200">
+                    <dl>
+                        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">
+                                Text
+                            </dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                {{ form.text}}
+                            </dd>
+                        </div>
+                        <div class="flex flex-wrap -mx-3 mb-6">
+                            <div class="w-full flex justify-center">
+                                <button type="submit" value="Submit"
+                                    class="shadow-none bg-blue-700 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-4 px-10 rounded-full">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </form>
+    </main>
+    </div>
+</body>
+
+
+{% endblock content %}

@@ -20,9 +20,4 @@
     - Students by average mark(users by average mark of specific skill) - DONE
     - Users total average of all specific skills combined - DONE
     - Underperforming students (underperforming percentage) - DONE
-    - Top attributes by average rating
 
-
-
-*Added is_staff permissions for detail view
-*

@@ -1,11 +1,12 @@
 from django.db.models import Avg, Q, F
-from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
+from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from django.core.paginator import Paginator
 
 
 from .forms import RegistrationForm, EditUserForm
+from ratings.forms import EditCommentForm
 from .models import User, UserWorkOffice
 from ratings.models import Review
 
@@ -24,6 +25,7 @@ def search(request):
         'queryset': queryset,
     }
     return render(request, 'search.html', context)
+
 
 
 @login_required
@@ -158,3 +160,39 @@ def edit_user(request, pk):
 
     return render(request, 'users/edit_user.html', {'form': editForm})
 
+@login_required
+def edit_comment(request, pk):
+    post = get_object_or_404(Review, pk=pk)
+    if request.method == 'POST':
+        form = EditCommentForm(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return HttpResponseRedirect('/home/')
+    else:
+        form = EditCommentForm(instance=post)
+    
+    context = {
+        "form": form,
+        "post": post
+    }
+
+    return render(request, 'ratings/edit_comment.html', context)
+
+# @login_required
+# def edit_comment(request, reviewed_pk, review_pk):
+#     #reviewed user
+#     reviewed = User.objects.get(pk=reviewed_pk)
+#     #review
+#     post = Review.objects.get(reviewed=reviewed, pk=review_pk)
+
+#     if request.method == 'POST':
+#         form = EditCommentForm(request.POST, instance=post)
+#         if form.is_valid():
+#             data = form.save(commit=False)
+#             data.save()
+#             return redirect('users:user_details', reviewed_pk)
+#     else:
+#         form = EditCommentForm(instance=post)
+    
+#     return render(request, 'ratings/edit_comment.html', {'form': form})
