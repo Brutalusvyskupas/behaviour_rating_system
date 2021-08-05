@@ -36,7 +36,7 @@ class UserAccountManager(BaseUserManager):
 class UserWorkOffice(models.Model):
     office_name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=30, unique=True)
-    # office_pic
+    office_image = models.ImageField(default='office_default.jpg', upload_to='office_pics')
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.office_name)
@@ -69,7 +69,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    # profile_picture
+    profile_image = models.ImageField(default='default.jpg', upload_to='profile_pics')
     objects = UserAccountManager()
 
     USERNAME_FIELD = "email"

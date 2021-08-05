@@ -123,7 +123,7 @@ def top_performing_offices(request):
 # Users overall(of all attributes combined) ratings
 @register.filter(name='users_overall_rating')
 def users_overall_rating(request):
-    overall_ratings = Review.objects.values('reviewed_user__first_name', 'reviewed_user__last_name').annotate(
+    overall_ratings = Review.objects.values('reviewed_user__first_name', 'reviewed_user__last_name', 'reviewed_user__profile_image').annotate(
         all=Avg(
             F('rate_professionalism')
             + F('rate_teamwork')

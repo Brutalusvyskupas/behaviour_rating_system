@@ -25,10 +25,10 @@
         <main class="p-6 sm:p-10 space-y-6">
             <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-between">
                 <div class="mr-6">
-                    <h1 class="text-4xl font-semibold mb-2">Dashboard</h1>
-                    <h2 class="text-gray-600 ml-0.5">Mobile UX/UI Design course</h2>
+                    <h1 class="text-4xl font-semibold mb-2">Main Dashboard</h1>
+                    {% comment %} <h2 class="text-gray-600 ml-0.5">Mobile UX/UI Design course</h2> {% endcomment %}
                 </div>
-                <div class="flex flex-wrap items-start justify-end -mb-3">
+                <div class="flex flex-wrap items-start justify-start -mb-3">
                     {% comment %} SEARCH {% endcomment %}
                     <form class="d-flex" method='GET' action="{% url 'users:search' %}">
                         <div class="search shadow flex">
@@ -82,7 +82,7 @@
                     </div>
                     <div>
                         <span class="inline-block text-2xl font-bold">{{overperforming_users_count|overperforming_users_count}}</span>
-                        <span class="inline-block text-xl text-gray-500 font-semibold">({{overperforming_users_percentage|overperforming_users_percentage}}%)</span>
+                        <span class="inline-block text-xl text-gray-500 font-semibold">({{overperforming_users_percentage|overperforming_users_percentage|floatformat:2}}%)</span>
                         <span class="block text-gray-500">Overperforming employees</span>
                     </div>
                 </div>
@@ -96,7 +96,7 @@
                     </div>
                     <div>
                         <span class="inline-block text-2xl font-bold">{{under_performing_users_count|underperforming_users_count}}</span>
-                        <span class="inline-block text-xl text-gray-500 font-semibold">({{underperforming_users_percentage|underperforming_users_percentage}}%)</span>
+                        <span class="inline-block text-xl text-gray-500 font-semibold">({{underperforming_users_percentage|underperforming_users_percentage|floatformat:2}}%)</span>
                         <span class="block text-gray-500">Underperforming employees</span>
                     </div>
                 </div>
@@ -160,8 +160,7 @@
                         <ul class="p-6 space-y-6">
                             <li class="flex items-center">
                                 <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                                    <img src="https://randomuser.me/api/portraits/women/82.jpg"
-                                        alt="Annette Watson profile picture">
+                                    <img src="{{ user.reviewed_user__profile_image.url }}">
                                 </div>
                                 <span class="text-gray-600">{{ user.reviewed_user__first_name }}
                                     {{ user.reviewed_user__last_name }}</span>
@@ -177,8 +176,7 @@
                         <ul class="p-6 space-y-6">
                             <li class="flex items-center">
                                 <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                                    <img src="https://randomuser.me/api/portraits/women/82.jpg"
-                                        alt="Annette Watson profile picture">
+                                    <img src="{{ office.office_image.url }}">
                                 </div>
                                 <span class="text-gray-600">{{ office.reviewed_user__work_office__office_name}}</span>
                                 <span class="ml-auto font-semibold">{{ office.all| floatformat:2 }}</span>

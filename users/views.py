@@ -1,5 +1,5 @@
 from django.db.models import Avg, Q, F
-from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from django.core.paginator import Paginator
@@ -31,7 +31,7 @@ def search(request):
 @login_required
 def user_details(request, pk):
     user = get_object_or_404(User, pk=pk)
-    user_review = Review.objects.filter(reviewed_user=user)
+    user_review = Review.objects.filter(reviewed_user=user).order_by('-date')
     avg_rating = Review.objects.filter(reviewed_user=user).aggregate(avg_professionalism=Avg('rate_professionalism'),
                                                                      avg_teamwork=Avg(
                                                                          'rate_teamwork'),
@@ -66,7 +66,7 @@ def user_details(request, pk):
         ))
 
     # PAGINATOR
-    paginator = Paginator(user_review, 8)
+    paginator = Paginator(user_review, 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -82,7 +82,7 @@ def user_details(request, pk):
 
 @login_required
 def users_list(request):
-    offices = UserWorkOffice.objects.all()
+    offices = UserWorkOffice.objects.all().order_by("office_name")
 
     # PAGINATOR
     paginator = Paginator(offices, 1)
@@ -107,7 +107,7 @@ def list_of_offices(request):
 
 @login_required
 def list_of_users_by_office(request, office_slug):
-    offices = UserWorkOffice.objects.all()
+    offices = UserWorkOffice.objects.all().order_by("office_name")
     queryset = User.objects.all()
     if office_slug:
         work_office = get_object_or_404(UserWorkOffice, slug=office_slug)
@@ -168,7 +168,7 @@ def edit_comment(request, pk):
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return HttpResponseRedirect('/home/')
+            return redirect('users:user_details', pk=post.reviewed_user.pk)
     else:
         form = EditCommentForm(instance=post)
     
@@ -178,21 +178,3 @@ def edit_comment(request, pk):
     }
 
     return render(request, 'ratings/edit_comment.html', context)
-
-# @login_required
-# def edit_comment(request, reviewed_pk, review_pk):
-#     #reviewed user
-#     reviewed = User.objects.get(pk=reviewed_pk)
-#     #review
-#     post = Review.objects.get(reviewed=reviewed, pk=review_pk)
-
-#     if request.method == 'POST':
-#         form = EditCommentForm(request.POST, instance=post)
-#         if form.is_valid():
-#             data = form.save(commit=False)
-#             data.save()
-#             return redirect('users:user_details', reviewed_pk)
-#     else:
-#         form = EditCommentForm(instance=post)
-    
-#     return render(request, 'ratings/edit_comment.html', {'form': form})

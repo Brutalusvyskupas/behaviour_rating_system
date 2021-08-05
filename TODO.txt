@@ -21,3 +21,5 @@
     - Users total average of all specific skills combined - DONE
     - Underperforming students (underperforming percentage) - DONE
 
+
+cancel button, fixed redirect urls, image field for offices/users
