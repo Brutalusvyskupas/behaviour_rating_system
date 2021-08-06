@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 
 {% load ratings_filters %}
@@ -44,6 +44,18 @@
                             </button>
                         </div>
                     </form>
+                    {% if request.user.is_staff %}
+                    <a href={% url 'admin:index' %}><button
+                            class="admin inline-flex px-5 py-3 text-purple-600 hover:text-purple-700 focus:text-purple-700 hover:bg-purple-100 focus:bg-purple-100 border border-purple-600 rounded-md mb-3">
+                            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                class="flex-shrink-0 h-5 w-5 -ml-1 mt-0.5 mr-2">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                            </svg>
+                            Admin Panel
+                        </button>
+                    </a>
+                    {% endif %}
                     <a href={% url 'users:edit_user' pk=user.pk %}><button
                             class="inline-flex px-5 py-3 text-purple-600 hover:text-purple-700 focus:text-purple-700 hover:bg-purple-100 focus:bg-purple-100 border border-purple-600 rounded-md mb-3">
                             <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -117,7 +129,13 @@
             <section class="grid md:grid-cols-2 xl:grid-cols-4 xl:grid-rows-3 xl:grid-flow-col gap-6">
                 <div class="flex flex-col md:col-span-2 md:row-span-2 bg-white shadow rounded-lg">
                     <div class="px-6 py-5 font-semibold border-b border-gray-100">Top attributes</div>
-           
+                        {% for attribute in top_attributes|top_attributes %}
+                        <ul class="p-6 space-y-6">
+                            <li class="flex items-center">
+                                <span class="text-gray-600">Proff{{ attribute.avg_professionalism }}</span>
+                            </li>
+                        </ul>
+                        {% endfor %}
 
                 </div>
                 <div class="flex items-center p-8 bg-white shadow rounded-lg">
@@ -160,7 +178,7 @@
                         <ul class="p-6 space-y-6">
                             <li class="flex items-center">
                                 <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                                    <img src="{{ user.reviewed_user__profile_image.url }}">
+                                    <img src="{% get_media_prefix %}{{ user.reviewed_user__profile_image }}">
                                 </div>
                                 <span class="text-gray-600">{{ user.reviewed_user__first_name }}
                                     {{ user.reviewed_user__last_name }}</span>
@@ -176,7 +194,7 @@
                         <ul class="p-6 space-y-6">
                             <li class="flex items-center">
                                 <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                                    <img src="{{ office.office_image.url }}">
+                                    <img src="{% get_media_prefix %}{{ office.reviewed_user__work_office__office_image }}">
                                 </div>
                                 <span class="text-gray-600">{{ office.reviewed_user__work_office__office_name}}</span>
                                 <span class="ml-auto font-semibold">{{ office.all| floatformat:2 }}</span>

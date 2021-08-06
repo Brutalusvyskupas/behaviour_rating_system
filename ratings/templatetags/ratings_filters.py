@@ -104,7 +104,7 @@ def underperforming_users_percentage(request):
 # TOP PERFORMING OFFICES
 @register.filter(name='top_performing_offices')
 def top_performing_offices(request):
-    offices_performance = Review.objects.values('reviewed_user__work_office__office_name').annotate(
+    offices_performance = Review.objects.values('reviewed_user__work_office__office_name', 'reviewed_user__work_office__office_image').annotate(
         all=Avg(
             F('rate_professionalism')
             + F('rate_teamwork')
@@ -157,7 +157,7 @@ def avg_user_rating(request):
 
     return ratings
 
-# Top 5 attributes by average rating
+#Top 5 attributes by average rating
 # @register.filter(name='top_attributes')
 # def top_attributes(request):
 #     attributes = Review.objects.annotate(
