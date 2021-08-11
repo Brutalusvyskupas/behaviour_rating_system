@@ -2,14 +2,17 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
 from users.models import User, UserWorkOffice
+from posts.models import Post
 
 
 @login_required
 def home(request):
     users = User.objects.all()
+    posts = Post.objects.order_by("-date_posted")
     offices = UserWorkOffice.objects.order_by("office_name")
     context = {
         'users': users,
+        'posts': posts,
         'offices': offices,
 
     }

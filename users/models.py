@@ -1,10 +1,10 @@
 import uuid
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
+from django.utils import timezone
 from django.utils.text import slugify
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-from PIL import Image
 
 
 class UserAccountManager(BaseUserManager):
@@ -88,3 +88,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return reverse('users:user_details', kwargs={
             'pk': self.pk
         })
+
+    @property
+    def date_calculate(self):
+        return (timezone.now() - self.created).days

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # My apps
     'users',
     'ratings',
+    'posts',
     # 3rd party apps
 
 ]
