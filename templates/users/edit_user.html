@@ -13,7 +13,7 @@
             </div>
         </div>
         <!--Employee information-->
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {% if form.errors %}
             <p>Please correct the following errors:</p>
@@ -28,7 +28,7 @@
             <div class="bg-white shadow overflow-hidden sm:rounded-lg">
                 <div class="px-4 py-5 sm:px-6">
                     <img class="h-10 w-10 rounded-full"
-                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
+                        src="{{ user.profile_image.url }}"
                         alt="">
                     <h3 class="text-lg leading-6 font-medium text-gray-900">
                         Edit information
@@ -79,8 +79,15 @@
                                 {{ form.phone_number }}
                             </dd>
                         </div>
+                        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">
+                                Profile Image
+                            </dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                {{ form.profile_image }}
+                            </dd>
+                        </div>
                         <div class="flex flex-wrap -mx-3 mb-6">
-
                             <div class="w-full flex justify-center">
                                 <button type="submit" value="Submit"
                                     class="shadow-none bg-blue-700 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-4 px-10 rounded-full">

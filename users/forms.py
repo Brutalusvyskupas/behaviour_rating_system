@@ -17,6 +17,7 @@ class RegistrationForm(forms.ModelForm):
         queryset=UserWorkOffice.objects.all(), required=True)
     title = forms.CharField(max_length=100, label="Title")
     phone_number = forms.CharField(max_length=20, label="Phone number")
+    profile_image = forms.ImageField(required=False, widget=forms.FileInput)
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(
         label='Repeat password', widget=forms.PasswordInput)
@@ -24,7 +25,7 @@ class RegistrationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ("first_name", "last_name", "email", "work_office",
+        fields = ("first_name", "last_name", "email", "profile_image", "work_office",
                   "title", "phone_number", "password", "password2")
 
     # def clean_username(self):
@@ -54,7 +55,7 @@ class RegistrationForm(forms.ModelForm):
                 'Please use another phone number, that is already taken')
         return phone_number
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs): 
         super().__init__(*args, **kwargs)
         self.fields['first_name'].widget.attrs.update(
             {'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded-full py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white', 'placeholder': 'First Name'})
@@ -83,10 +84,11 @@ class EditUserForm(forms.ModelForm):
         queryset=UserWorkOffice.objects.all())
     title = forms.CharField(max_length=100, label="Title")
     phone_number = forms.CharField(max_length=20, label="Phone number")
+    profile_image = forms.ImageField(required=False, widget=forms.FileInput)
 
     class Meta:
         model = User
-        fields = ("last_name", "email", "work_office", "title", "phone_number")
+        fields = ("last_name", "email", "work_office", "title", "phone_number", "profile_image")
 
 
 class LoginForm(AuthenticationForm):

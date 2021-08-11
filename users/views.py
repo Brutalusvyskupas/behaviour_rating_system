@@ -1,5 +1,5 @@
 from django.db.models import Avg, Q, F
-from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from django.core.paginator import Paginator
@@ -127,7 +127,7 @@ def register(request):
         return redirect('/')
 
     if request.method == 'POST':
-        registerForm = RegistrationForm(request.POST)
+        registerForm = RegistrationForm(request.POST, request.FILES)
         if registerForm.is_valid():
             user = registerForm.save(commit=False)
             user.email = registerForm.cleaned_data['email']
@@ -150,7 +150,7 @@ def register(request):
 def edit_user(request, pk):
 
     if request.method == 'POST':
-        editForm = EditUserForm(request.POST, instance=request.user)
+        editForm = EditUserForm(request.POST, request.FILES, instance=request.user)
         if editForm.is_valid():
             editForm.save()
             return redirect('users:user_details', pk=pk)
@@ -178,3 +178,4 @@ def edit_comment(request, pk):
     }
 
     return render(request, 'ratings/edit_comment.html', context)
+

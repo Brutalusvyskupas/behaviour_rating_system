@@ -114,28 +114,22 @@
                 </div>
                 <div class="flex items-center p-8 bg-white shadow rounded-lg">
                     <div
-                        class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-blue-600 bg-blue-100 rounded-full mr-6">
-                        <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-yellow-600 bg-yellow-100 rounded-full mr-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                         </svg>
                     </div>
                     <div>
-                        <span class="block text-2xl font-bold">83%</span>
-                        <span class="block text-gray-500">Finished homeworks</span>
+                        <span class="inline-block text-2xl font-bold">{{average_users_count|average_users_count}}</span>
+                        <span class="inline-block text-xl text-gray-500 font-semibold">({{average_users_percentage|average_users_percentage|floatformat:2}}%)</span>
+                        <span class="block text-gray-500">Average performing employees</span>
                     </div>
                 </div>
             </section>
             <section class="grid md:grid-cols-2 xl:grid-cols-4 xl:grid-rows-3 xl:grid-flow-col gap-6">
                 <div class="flex flex-col md:col-span-2 md:row-span-2 bg-white shadow rounded-lg">
                     <div class="px-6 py-5 font-semibold border-b border-gray-100">Top attributes</div>
-                        {% for attribute in top_attributes|top_attributes %}
-                        <ul class="p-6 space-y-6">
-                            <li class="flex items-center">
-                                <span class="text-gray-600">Proff{{ attribute.avg_professionalism }}</span>
-                            </li>
-                        </ul>
-                        {% endfor %}
+
 
                 </div>
                 <div class="flex items-center p-8 bg-white shadow rounded-lg">
@@ -203,37 +197,44 @@
                     {% endfor %}
                 </div>
             </section>
+            <main class="p-6 sm:p-10 space-y-6">
+            <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-center">
+                <div class="mr-6">
+                    <h1 class="text-4xl font-semibold mb-2">TOP 5 USERS</h1>
+                    <h2 class="text-gray-600 ml-0.5">Users statistics by each attribute</h2>
+                </div>
+            </div>
 
             <section class="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
-                <div class="px-6 py-5 font-semibold border-b border-gray-100">Proffesionalism
-                    <canvas id="proffesionalism_chart" height='600' width='600'>Proffesionalism</canvas></div>
-                <span id='span'></span>
-                <div class="px-6 py-5 font-semibold border-b border-gray-100">Teamwork
-                    <canvas id="teamwork_chart" height='600' width='600'>Teamwork</canvas></div>
-                <span id='span'></span>
-                <div class="px-6 py-5 font-semibold border-b border-gray-100">Communication
-                    <canvas id="communication_chart" height='600' width='600'>Communication</canvas></div>
-                <span id='span'></span>
-                <div class="px-6 py-5 font-semibold border-b border-gray-100">Organize
-                    <canvas id="organize_chart" height='600' width='600'>Organize</canvas></div>
-                <span id='span'></span>
-                <div class="px-6 py-5 font-semibold border-b border-gray-100">Problem Solving
-                    <canvas id="problem_solving_chart" height='600' width='600'>Problem Solving</canvas></div>
-                <span id='span'></span>
-                <div class="px-6 py-5 font-semibold border-b border-gray-100">Personality
-                    <canvas id="personality_chart" height='600' width='600'>Personality</canvas></div>
-                <span id='span'></span>
-                <div class="px-6 py-5 font-semibold border-b border-gray-100">Reliability
-                    <canvas id="reliability_chart" height='600' width='600'>Reliability</canvas></div>
-                <span id='span'></span>
-                <div class="px-6 py-5 font-semibold border-b border-gray-100">Honesty and integrity
-                    <canvas id="honesty_integrity_chart" height='600' width='600'>Honesty and integrity</canvas></div>
-                <span id='span'></span><div class="px-6 py-5 font-semibold border-b border-gray-100">Emotional Intelligence
-                    <canvas id="emotional_intelligence_chart" height='600' width='600'>Emotional Intelligence</canvas></div>
-                <span id='span'></span>
-                <div class="px-6 py-5 font-semibold border-b border-gray-100">Willingness to learn
-                    <canvas id="willingness_to_learn_chart" height='600' width='600'>Willingness to learn</canvas></div>
-                <span id='span'></span>
+                    <div class="px-6 py-5 font-semibold border-b border-gray-100">Proffesionalism
+                        <canvas id="proffesionalism_chart" height='600' width='600'>Proffesionalism</canvas></div>
+                    <span id='span'></span>
+                    <div class="px-6 py-5 font-semibold border-b border-gray-100">Teamwork
+                        <canvas id="teamwork_chart" height='600' width='600'>Teamwork</canvas></div>
+                    <span id='span'></span>
+                    <div class="px-6 py-5 font-semibold border-b border-gray-100">Communication
+                        <canvas id="communication_chart" height='600' width='600'>Communication</canvas></div>
+                    <span id='span'></span>
+                    <div class="px-6 py-5 font-semibold border-b border-gray-100">Organize
+                        <canvas id="organize_chart" height='600' width='600'>Organize</canvas></div>
+                    <span id='span'></span>
+                    <div class="px-6 py-5 font-semibold border-b border-gray-100">Problem Solving
+                        <canvas id="problem_solving_chart" height='600' width='600'>Problem Solving</canvas></div>
+                    <span id='span'></span>
+                    <div class="px-6 py-5 font-semibold border-b border-gray-100">Personality
+                        <canvas id="personality_chart" height='600' width='600'>Personality</canvas></div>
+                    <span id='span'></span>
+                    <div class="px-6 py-5 font-semibold border-b border-gray-100">Reliability
+                        <canvas id="reliability_chart" height='600' width='600'>Reliability</canvas></div>
+                    <span id='span'></span>
+                    <div class="px-6 py-5 font-semibold border-b border-gray-100">Honesty and integrity
+                        <canvas id="honesty_integrity_chart" height='600' width='600'>Honesty and integrity</canvas></div>
+                    <span id='span'></span><div class="px-6 py-5 font-semibold border-b border-gray-100">Emotional Intelligence
+                        <canvas id="emotional_intelligence_chart" height='600' width='600'>Emotional Intelligence</canvas></div>
+                    <span id='span'></span>
+                    <div class="px-6 py-5 font-semibold border-b border-gray-100">Willingness to learn
+                        <canvas id="willingness_to_learn_chart" height='600' width='600'>Willingness to learn</canvas></div>
+                    <span id='span'></span>
             </section>
 
         </main>
