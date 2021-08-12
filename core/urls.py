@@ -13,6 +13,7 @@ urlpatterns = [
     path('home/', home, name="home"),
     path('admin/', admin.site.urls),
     path('', include('users.urls', namespace="users")),
+    path('', include('posts.urls', namespace="posts")),
 
 ]
 

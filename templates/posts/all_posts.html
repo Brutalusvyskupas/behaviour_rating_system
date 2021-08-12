@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block title %}List of offices{% endblock title %}
+
+
+{% block content %}
+
+
+<body class="flex bg-gray-100 min-h-screen">
+
+    <main class="p-6 sm:p-10 space-y-6">
+        <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-between">
+            <div class="mr-6">
+                <h1 class="text-4xl font-semibold mb-2">All posts</h1>
+                {% comment %} <h2 class="text-gray-600 ml-0.5">Mobile UX/UI Design course</h2> {% endcomment %}
+            </div>
+            <div class="flex flex-wrap items-start justify-center -mb-3">
+                {% comment %} SEARCH {% endcomment %}
+                <form class="d-flex" method='GET' action="{% url 'users:search' %}">
+                    <div class="search shadow flex">
+                        <input class="w-full rounded p-3" type="text" name='q' placeholder="Search...">
+                        <button
+                            class="text-purple-600 bg-white w-auto flex justify-end items-center text-blue-500 p-2 hover:text-blue-400"
+                            type="submit">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+                {% if request.user.is_staff %}
+                <a href={% url 'admin:index' %}><button
+                        class="adminbox inline-flex px-5 py-3 text-purple-600 hover:text-purple-700 focus:text-purple-700 hover:bg-purple-100 focus:bg-purple-100 border border-purple-600 rounded-md mb-3">
+                        <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            class="flex-shrink-0 h-5 w-5 -ml-1 mt-0.5 mr-2">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                        </svg>
+                        Admin Panel
+                    </button>
+                </a>
+                {% endif %}
+                <a href={% url 'users:edit_user' pk=user.pk %}><button
+                        class="adminbox inline-flex px-5 py-3 text-purple-600 hover:text-purple-700 focus:text-purple-700 hover:bg-purple-100 focus:bg-purple-100 border border-purple-600 rounded-md mb-3">
+                        <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            class="flex-shrink-0 h-5 w-5 -ml-1 mt-0.5 mr-2">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                        </svg>
+                        Edit Profile
+                    </button></a>
+            </div>
+        </div>
+        <!--LIST OF POSTS -->
+        <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-2">
+        {% for post in page_obj %}
+            <div class="flex flex-col md:col-span-2 md:row-span-2 bg-white shadow rounded-lg">
+                <a href={% url 'posts:post_details' pk=post.pk %}><div class="px-4 py-5 font-semibold border-b border-gray-100">{{ post.title }}</div></a>
+                <div class="overflow-y-auto" style="max-height: 30rem;">
+                    <ul class="p-4 space-y-4">
+                        <li class="flex items-left">
+                            <span class="truncate text-gray-600">{{ post.body }}</span>
+                            {% comment %} <span class="ml-auto font-semibold">{{ user.all| floatformat:2 }}</span>
+                            {% endcomment %}
+                        </li>
+                        </br>
+                        <span class="font-semibold border-b border-gray-100">{{ post.date_posted }}</span>
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+                <div class="flex flex-col items-center my-12">
+            <div class="flex text-gray-700">
+                {% if page_obj.has_previous %}
+
+                <div class="h-12 w-12 mr-1 flex justify-center items-center rounded-full bg-gray-200 cursor-pointer">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="feather feather-chevron-left w-6 h-6">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </a>
+                </div>
+
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                <div class="flex h-12 font-medium rounded-full bg-gray-200">
+                    {% if page_obj.number == num %}
+                    <div
+                        class="w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded-full bg-teal-600 text-white">
+                        <a class="w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded-full"
+                            href="?page={{ num }}">{{ num }}</a></div>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <div
+                        class="w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded-full">
+                        <a class="page-link" href="?page={{ num }}">{{ num }}</a></div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+
+
+                {% if page_obj.has_next %}
+                <div class="h-12 w-12 ml-1 flex justify-center items-center rounded-full bg-gray-200 cursor-pointer">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="feather feather-chevron-right w-6 h-6">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+    </div>
+</body>
+
+
+
+{% endblock content %}

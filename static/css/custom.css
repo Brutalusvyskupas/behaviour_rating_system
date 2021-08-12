@@ -26,6 +26,10 @@
   margin-right: 10px;
 }
 
+.adminbox {
+  margin-right: 10px;
+}
+
 .admin {
   margin-right: 10px;
 }
@@ -33,4 +37,12 @@
 .edit_button {
   position: absolute;
   right: 40px;
+}
+
+.truncate {
+  width: 1000px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
 }

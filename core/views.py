@@ -8,7 +8,7 @@ from posts.models import Post
 @login_required
 def home(request):
     users = User.objects.all()
-    posts = Post.objects.order_by("-date_posted")
+    posts = Post.objects.order_by("-date_posted")[:4]
     offices = UserWorkOffice.objects.order_by("office_name")
     context = {
         'users': users,

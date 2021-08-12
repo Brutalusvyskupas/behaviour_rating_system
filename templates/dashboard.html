@@ -128,16 +128,21 @@
             </section>
             <section class="grid md:grid-cols-2 xl:grid-cols-4 xl:grid-rows-3 xl:grid-flow-col gap-6">
                 <div class="flex flex-col md:col-span-2 md:row-span-2 bg-white shadow rounded-lg">
-                    <div class="px-6 py-5 font-semibold border-b border-gray-100">Message of the day</div>
-                    {% for post in posts  %}
-                    
-                        <p>{{ post.title }}</p>
-                        <p>{{ post.body }}</p>
-                        <p>{{ post.date_posted }}</p>
-                    
-                    {% endfor %}
-
-
+                    <div class="px-4 py-5 font-semibold border-b border-gray-100">Message of the day</div>
+                        <div class="overflow-y-auto" style="max-height: 15rem;">
+                        {% for post in posts %}
+                        <ul class="p-4 space-y-1">
+                            <a href={% url 'posts:post_details' pk=post.pk %}><span class="font-semibold border-b border-gray-100">{{ post.title }}</span></a>
+                            <li class="flex items-left">
+                                <span class="text-gray-600">{{ post.body }}</span>
+                                <span class="ml-auto font-semibold">{{ user.all| floatformat:2 }}</span>
+                            </li>
+                            </br>
+                            <span class="font-semibold border-b border-gray-100">{{ post.date_posted }}</span>
+                        </ul>
+                        <hr>
+                        {% endfor %}
+                        </div>
                 </div>
                 <div class="flex items-center p-8 bg-white shadow rounded-lg">
                     <div
@@ -203,8 +208,8 @@
             <main class="p-6 sm:p-10 space-y-6">
             <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-center">
                 <div class="mr-6">
-                    <h1 class="text-4xl font-semibold mb-2">TOP 5 USERS</h1>
-                    <h2 class="text-gray-600 ml-0.5">Users statistics by each attribute</h2>
+                    <h1 class="text-4xl font-semibold mb-2">TOP USERS</h1>
+                    <h2 class="text-gray-600 ml-0.5">Users with score 7 or above</h2>
                 </div>
             </div>
             <section class="flex flex-wrap gap-4 md:gap-10 bg-white shadow rounded-lg justify-center">
