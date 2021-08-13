@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'ratings',
     'posts',
     # 3rd party apps
-
+    "crispy_forms",
+    "crispy_tailwind",
 ]
 
 MIDDLEWARE = [

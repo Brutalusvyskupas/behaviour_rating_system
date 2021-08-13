@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{% load tailwind_filters %}
 
-{% block title %}Edit text comment{% endblock title %}
+{% block title %}Create post{% endblock title %}
 
 {% block content %}
 
@@ -8,12 +9,12 @@
     <main class="p-6 sm:p-10 space-y-6">
         <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-between">
             <div class="mr-6">
-                <h1 class="text-4xl font-semibold mb-2">Dashboard</h1>
-                <h2 class="text-gray-600 ml-0.5">Mobile UX/UI Design course</h2>
+                <h1 class="text-4xl font-semibold mb-2">Create post</h1>
             </div>
         </div>
         <!--Employee information-->
         <form method="post">
+            {{ form.media }}
             {% csrf_token %}
             {% if form.errors %}
             <p>Please correct the following errors:</p>
@@ -26,24 +27,16 @@
             {% endfor %}
             {% endif %}
             <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                <div class="px-4 py-5 sm:px-6">
-                    <img class="h-10 w-10 rounded-full"
-                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
-                        alt="">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">
-                        Edit <strong>{{ post.reviewed_by.first_name }} {{ post.reviewed_by.last_name }}</strong> text comment
-                    </h3>
-                </div>
                 <div class="border-t border-gray-200">
                     <dl>
                         <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
                             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                {{ form.text}}
+                                {{ form|crispy }}
                             </dd>
                         </div>
                         <div class="flex flex-wrap -mx-3 mb-6">
                             <div class="w-full flex justify-center">
-                                <a class="shadow-none bg-red-700 hover:bg-red-400 focus:shadow-outline focus:outline-none text-white font-bold py-4 px-10 rounded-full" href="{% url 'users:user_details' pk=post.reviewed_user.pk %}">Cancel</a>
+                                <a class="shadow-none bg-red-700 hover:bg-red-400 focus:shadow-outline focus:outline-none text-white font-bold py-4 px-10 rounded-full" href="{{request.META.HTTP_REFERER}}">Cancel</a>
                                 <button type="submit" value="Submit"
                                     class="shadow-none bg-blue-700 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-4 px-10 rounded-full">
                                     Submit
@@ -55,7 +48,6 @@
             </div>
         </form>
     </main>
-    </div>
 </body>
 
 

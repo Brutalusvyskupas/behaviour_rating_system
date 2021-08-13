@@ -21,4 +21,6 @@
     - Users total average of all specific skills combined - DONE
     - Underperforming students (underperforming percentage) - DONE
 
--Added edit profile, registration (profile image change/registration) pushed
+-delete,edit,create options with buttons
+
+-patvarkyt css user_details, all_posts
