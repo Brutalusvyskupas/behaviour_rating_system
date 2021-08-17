@@ -21,6 +21,6 @@
     - Users total average of all specific skills combined - DONE
     - Underperforming students (underperforming percentage) - DONE
 
--delete,edit,create options with buttons
+
 
 -patvarkyt css user_details, all_posts

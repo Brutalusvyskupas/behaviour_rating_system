@@ -11,9 +11,11 @@
         <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-between">
             <div class="flex flex-wrap items-start space-y-6 md:space-y-0 justify-center -mb-3">
                 <h1 class="text-4xl font-semibold mb-2"><a href="{% url 'users:list_of_users' %}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg></a></h1>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg></a></h1>
             </div>
             <div class="flex flex-wrap items-start space-y-6 md:space-y-0 justify-center -mb-3">
                 {% comment %} SEARCH {% endcomment %}
@@ -31,45 +33,44 @@
                         </button>
                     </div>
                 </form>
-                    {% if request.user.is_staff %}
-                    <a href={% url 'admin:index' %}><button
-                            class="adminbox inline-flex px-2 py-3 text-purple-600 hover:text-purple-700 focus:text-purple-700 hover:bg-purple-100 focus:bg-purple-100 border border-purple-600 rounded-md mb-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                            </svg>
-                            Admin Panel
-                        </button>
-                    </a>
-                    <a href={% url 'posts:create_post' %}><button
-                            class="adminbox inline-flex px-2 py-3 text-purple-600 hover:text-purple-700 focus:text-purple-700 hover:bg-purple-100 focus:bg-purple-100 border border-purple-600 rounded-md mb-3">
-                            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                class="flex-shrink-0 h-5 w-5 -ml-1 mt-0.5 mr-2">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                            </svg>
-                            Create post
-                        </button>
-                    </a>
-                    {% endif %}
-                    <a href={% url 'users:edit_user' pk=user.pk %}><button
-                            class="adminbox inline-flex px-2 py-3 text-purple-600 hover:text-purple-700 focus:text-purple-700 hover:bg-purple-100 focus:bg-purple-100 border border-purple-600 rounded-md mb-3">
-                            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                class="flex-shrink-0 h-5 w-5 -ml-1 mt-0.5 mr-2">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                            </svg>
-                            Edit Profile
-                        </button>
-                    </a>
+                {% if request.user.is_staff %}
+                <a href={% url 'admin:index' %}><button
+                        class="adminbox inline-flex px-2 py-3 text-purple-600 hover:text-purple-700 focus:text-purple-700 hover:bg-purple-100 focus:bg-purple-100 border border-purple-600 rounded-md mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        Admin Panel
+                    </button>
+                </a>
+                <a href={% url 'posts:create_post' %}><button
+                        class="adminbox inline-flex px-2 py-3 text-purple-600 hover:text-purple-700 focus:text-purple-700 hover:bg-purple-100 focus:bg-purple-100 border border-purple-600 rounded-md mb-3">
+                        <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            class="flex-shrink-0 h-5 w-5 -ml-1 mt-0.5 mr-2">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                        </svg>
+                        Create post
+                    </button>
+                </a>
+                {% endif %}
+                <a href={% url 'users:edit_user' pk=user.pk %}><button
+                        class="adminbox inline-flex px-2 py-3 text-purple-600 hover:text-purple-700 focus:text-purple-700 hover:bg-purple-100 focus:bg-purple-100 border border-purple-600 rounded-md mb-3">
+                        <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            class="flex-shrink-0 h-5 w-5 -ml-1 mt-0.5 mr-2">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                        </svg>
+                        Edit Profile
+                    </button>
                 </a>
             </div>
         </div>
         <!--Employee information-->
         <div class="bg-white shadow overflow-hidden sm:rounded-lg">
             <div class="px-4 py-5 sm:px-6">
-                <img class="h-10 w-10 rounded-full"
-                    src="{{ user.profile_image.url }}"
-                    alt="">
+                <img class="h-10 w-10 rounded-full" src="{{ user.profile_image.url }}" alt="">
                 <h3 class="text-lg leading-6 font-medium text-gray-900">
                     Employee information
                 </h3>
@@ -144,7 +145,14 @@
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                             {{ user.created }}
                         </dd>
-                    </div> 
+                    </div>
+                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <a href={% url 'password_change' %}>
+                            <dt class="text-sm font-medium text-gray-900">
+                                Change password
+                            </dt>
+                        </a>
+                    </div>
                 </dl>
             </div>
         </div>
@@ -285,7 +293,7 @@
                     </dd>
                     {% endif %}
                 </div>
-                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
                         Honesty and integrity
                     </dt>
@@ -303,7 +311,7 @@
                     </dd>
                     {% endif %}
                 </div>
-                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
                         Emotional intelligence
                     </dt>
@@ -321,7 +329,7 @@
                     </dd>
                     {% endif %}
                 </div>
-                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
                         Willingness to learn
                     </dt>
@@ -358,12 +366,14 @@
                         {{ review.text }}
                     </dd>
                     <a class='edit_button' href="{% url 'users:edit_comment' pk=review.pk %}">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                    </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                        </svg>
                     </a>
                 </div>
-            {% endfor %}
+                {% endfor %}
         </div>
 
         <div class="flex flex-col items-center my-12">
