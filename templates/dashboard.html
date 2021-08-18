@@ -4,8 +4,7 @@
 
 {% load ratings_filters %}
 
-<body class="flex bg-gray-100 min-h-screen">
-
+<body class="sm:flex bg-gray-100 min-h-screen">
 
         {% if messages %}
 
@@ -22,13 +21,13 @@
 
         {% endif %}
 
-        <main class="p-6 sm:p-10 space-y-6">
-            <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-between">
-                <div class="mr-6">
+        <main class="p-6 sm:p-10 space-y-6 text-center sm:text-left">
+            <div class="flex flex-col md:space-y-0 md:flex-row justify-between">
+                <div class="items-center justify-center">
                     <h1 class="text-4xl font-semibold mb-2">Main Dashboard</h1>
                     {% comment %} <h2 class="text-gray-600 ml-0.5">Mobile UX/UI Design course</h2> {% endcomment %}
                 </div>
-                <div class="flex flex-wrap items-start justify-start -mb-3">
+                <div class="flex flex-wrap items-center justify-center -mb-3">
                     {% comment %} SEARCH {% endcomment %}
                     <form class="d-flex" method='GET' action="{% url 'users:search' %}">
                         <div class="search shadow flex">
@@ -46,15 +45,17 @@
                     </form>
                     {% if request.user.is_staff %}
                     <a href={% url 'admin:index' %}><button
-                            class="admin inline-flex px-2 py-3 text-purple-600 hover:text-purple-700 focus:text-purple-700 hover:bg-purple-100 focus:bg-purple-100 border border-purple-600 rounded-md mb-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            class="adminbox inline-flex px-2 py-3 text-purple-600 hover:text-purple-700 focus:text-purple-700 hover:bg-purple-100 focus:bg-purple-100 border border-purple-600 rounded-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                             </svg>
                             Admin Panel
                         </button>
                     </a>
                     <a href={% url 'posts:create_post' %}><button
-                            class="admin inline-flex px-2 py-3 text-purple-600 hover:text-purple-700 focus:text-purple-700 hover:bg-purple-100 focus:bg-purple-100 border border-purple-600 rounded-md mb-3">
+                            class="adminbox inline-flex px-2 py-3 text-purple-600 hover:text-purple-700 focus:text-purple-700 hover:bg-purple-100 focus:bg-purple-100 border border-purple-600 rounded-md">
                             <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                 class="flex-shrink-0 h-5 w-5 -ml-1 mt-0.5 mr-2">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -65,7 +66,7 @@
                     </a>
                     {% endif %}
                     <a href={% url 'users:edit_user' pk=user.pk %}><button
-                            class="inline-flex px-2 py-3 text-purple-600 hover:text-purple-700 focus:text-purple-700 hover:bg-purple-100 focus:bg-purple-100 border border-purple-600 rounded-md mb-3">
+                            class="adminbox inline-flex px-2 py-3 text-purple-600 hover:text-purple-700 focus:text-purple-700 hover:bg-purple-100 focus:bg-purple-100 border border-purple-600 rounded-md">
                             <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                 class="flex-shrink-0 h-5 w-5 -ml-1 mt-0.5 mr-2">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -212,8 +213,8 @@
                     {% endfor %}
                 </div>
             </section>
-            <main class="p-6 sm:p-10 space-y-6">
-            <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-center">
+            
+            <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-center items-center justify-center">
                 <div class="mr-6">
                     <h1 class="text-4xl font-semibold mb-2">TOP USERS</h1>
                     <h2 class="text-gray-600 ml-0.5">Users with score 7 or above</h2>
@@ -221,37 +222,36 @@
             </div>
             <section class="flex flex-wrap gap-4 md:gap-10 bg-white shadow rounded-lg justify-center">
                 <div class="px-6 py-5 font-semibold border-b border-gray-100">Proffesionalism
-                    <canvas id="proffesionalism_chart" height='600' width='600'>Proffesionalism</canvas>
+                    <canvas  id="proffesionalism_chart">Proffesionalism</canvas>
                 </div>
                 <span id='span'></span>
                 <div class="px-6 py-5 font-semibold border-b border-gray-100">Teamwork
-                    <canvas id="teamwork_chart" height='600' width='600'>Teamwork</canvas></div>
+                    <canvas id="teamwork_chart">Teamwork</canvas></div>
                 <span id='span'></span>
                 <div class="px-6 py-5 font-semibold border-b border-gray-100">Communication
-                    <canvas id="communication_chart" height='600' width='600'>Communication</canvas></div>
+                    <canvas id="communication_chart">Communication</canvas></div>
                 <span id='span'></span>
                 <div class="px-6 py-5 font-semibold border-b border-gray-100">Organize
-                    <canvas id="organize_chart" height='600' width='600'>Organize</canvas></div>
+                    <canvas id="organize_chart">Organize</canvas></div>
                 <span id='span'></span>
                 <div class="px-6 py-5 font-semibold border-b border-gray-100">Problem Solving
-                    <canvas id="problem_solving_chart" height='600' width='600'>Problem Solving</canvas></div>
+                    <canvas id="problem_solving_chart">Problem Solving</canvas></div>
                 <span id='span'></span>
                 <div class="px-6 py-5 font-semibold border-b border-gray-100">Personality
-                    <canvas id="personality_chart" height='600' width='600'>Personality</canvas></div>
+                    <canvas id="personality_chart">Personality</canvas></div>
                 <span id='span'></span>
                 <div class="px-6 py-5 font-semibold border-b border-gray-100">Reliability
-                    <canvas id="reliability_chart" height='600' width='600'>Reliability</canvas></div>
+                    <canvas id="reliability_chart">Reliability</canvas></div>
                 <span id='span'></span>
                 <div class="px-6 py-5 font-semibold border-b border-gray-100">Honesty and integrity
-                    <canvas id="honesty_integrity_chart" height='600' width='600'>Honesty and integrity</canvas></div>
+                    <canvas id="honesty_integrity_chart">Honesty and integrity</canvas></div>
                 <span id='span'></span><div class="px-6 py-5 font-semibold border-b border-gray-100">Emotional Intelligence
-                    <canvas id="emotional_intelligence_chart" height='600' width='600'>Emotional Intelligence</canvas></div>
+                    <canvas id="emotional_intelligence_chart">Emotional Intelligence</canvas></div>
                 <span id='span'></span>
                 <div class="px-6 py-5 font-semibold border-b border-gray-100">Willingness to learn
-                    <canvas id="willingness_to_learn_chart" height='600' width='600'>Willingness to learn</canvas></div>
+                    <canvas id="willingness_to_learn_chart">Willingness to learn</canvas></div>
                 <span id='span'></span>
             </section>
-
         </main>
     </div>
 </body>

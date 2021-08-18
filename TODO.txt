@@ -22,5 +22,4 @@
     - Underperforming students (underperforming percentage) - DONE
 
 
-
--patvarkyt css user_details, all_posts
+text-center sm:text-left - text center
