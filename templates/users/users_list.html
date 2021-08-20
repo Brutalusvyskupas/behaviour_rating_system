@@ -21,7 +21,9 @@
 <body class="sm:flex bg-gray-100 min-h-screen">
     <main class="p-6 sm:p-10 space-y-6 text-center sm:text-left">
         <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-between">
-            <div class="mr-6"><h1 class="text-4xl font-semibold mb-2">All users</h1></div>
+            <div class="mr-6">
+                <h1 class="text-4xl font-semibold mb-2">All users</h1>
+            </div>
             <div class="flex flex-wrap items-center justify-center -mb-3">
                 {% comment %} SEARCH {% endcomment %}
                 <form class="d-flex" method='GET' action="{% url 'users:search' %}">
