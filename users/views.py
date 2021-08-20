@@ -23,6 +23,7 @@ def search(request):
         ).distinct()
     context = {
         'queryset': queryset,
+        'query': query,
     }
     return render(request, 'search.html', context)
 
@@ -82,10 +83,10 @@ def user_details(request, pk):
 
 @login_required
 def users_list(request):
-    offices = UserWorkOffice.objects.all().order_by("office_name")
+    offices = UserWorkOffice.objects.order_by("office_name")
 
     # PAGINATOR
-    paginator = Paginator(offices, 1)
+    paginator = Paginator(offices, 2)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -107,7 +108,7 @@ def list_of_offices(request):
 
 @login_required
 def list_of_users_by_office(request, office_slug):
-    offices = UserWorkOffice.objects.all().order_by("office_name")
+    offices = UserWorkOffice.objects.order_by("office_name")
     queryset = User.objects.all()
     if office_slug:
         work_office = get_object_or_404(UserWorkOffice, slug=office_slug)
