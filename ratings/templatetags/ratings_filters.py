@@ -94,7 +94,7 @@ def underperforming_users_percentage(request):
             + F('rate_honesty_integrity')
             + F('rate_emotional_intelligence')
             + F('rate_willingness_to_learn')
-        )).filter(all__gte=50)
+        )).filter(all__lte=50)
 
     underperforming_users = len(
         underperforming_users_count) * 100 / user_count
@@ -138,7 +138,7 @@ def average_users_percentage(request):
             + F('rate_honesty_integrity')
             + F('rate_emotional_intelligence')
             + F('rate_willingness_to_learn')
-        )).filter(all__range=(over_users, under_users))
+        )).filter(all__lte=79, all__gte=51)
 
 
     avg_users = len(
