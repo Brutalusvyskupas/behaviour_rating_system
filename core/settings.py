@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import environ
+import django_heroku
 
 env = environ.Env()
 environ.Env.read_env()
@@ -179,6 +180,9 @@ MEDIA_URL = 'http://{!s}.s3.amazonaws.com/media/'.format(AWS_STORAGE_BUCKET_NAME
 STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 DEFAULT_FILE_STORAGE = 'core.storages.MediaStore'
+
+#django-heroku
+django_heroku.settings(locals())
 
 # # HTTPS settings
 # SESSION_COOKIE_SECURE = True
