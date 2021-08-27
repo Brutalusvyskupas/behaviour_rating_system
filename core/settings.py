@@ -12,11 +12,12 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-import environ
-#import django_heroku
+from decouple import config
+#import environ
+#import django_heroku 12:20
 
-env = environ.Env()
-environ.Env.read_env()
+#env = environ.Env()
+#environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,10 +27,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True #env('DEBUG', cast=bool, default=False)
+DEBUG = True #config('DEBUG', cast=bool, default=False)
 
 ALLOWED_HOSTS = ['behaviour-rating-system.herokuapp.com']
 
@@ -96,12 +97,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # }
 DATABASES = {
     'default': {
-        'ENGINE': env("ENGINE"),
-        'NAME': env("NAME"),
-        'USER': env("USER"),
-        'PASSWORD': env("PASSWORD"),
-        'HOST': env("HOST"),
-        'PORT': env("PORT")
+        'ENGINE': config("ENGINE"),
+        'NAME': config("NAME"),
+        'USER': config("USER"),
+        'PASSWORD': config("PASSWORD"),
+        'HOST': config("HOST"),
+        'PORT': config("PORT")
     }
 }
 
@@ -164,9 +165,9 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 CRISPY_TEMPLATE_PACK = "tailwind"
 
 # # S3 BUCKETS CONFIG
-AWS_ACCESS_KEY_ID=env('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY=env('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME=env('AWS_STORAGE_BUCKET_NAME')
+AWS_ACCESS_KEY_ID=config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY=config('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME=config('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 AWS_DEFAULT_ACL = 'public-read'
