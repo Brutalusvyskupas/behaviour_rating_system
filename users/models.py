@@ -90,17 +90,6 @@ class User(AbstractBaseUser, PermissionsMixin):
             'pk': self.pk
         })
 
-    def save(self):
-        super().save()
-
-        img = Image.open(self.profile_image.path)
-
-        if img.height > 300 or img.width > 300:
-            output_size = (300, 300)
-            img.thumbnail(output_size)
-            img.save(self.profile_image.path, format='JPEG', quality=99)
-
-
     @property
     def date_calculate(self):
         return (timezone.now() - self.created).days

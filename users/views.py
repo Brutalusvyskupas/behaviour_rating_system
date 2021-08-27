@@ -141,7 +141,7 @@ def register(request):
             user.save()
             # registerForm.save_m2m()
             login(request, user)
-            return redirect("/home")
+            return redirect("/home/")
     else:
         registerForm = RegistrationForm()
     return render(request, 'users/register.html', {'form': registerForm})
