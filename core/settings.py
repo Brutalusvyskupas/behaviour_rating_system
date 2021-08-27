@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import environ
-import django_heroku
+#import django_heroku
 
 env = environ.Env()
 environ.Env.read_env()
@@ -182,7 +182,7 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 DEFAULT_FILE_STORAGE = 'core.storages.MediaStore'
 
 #django-heroku
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
 
 # # HTTPS settings
 # SESSION_COOKIE_SECURE = True
