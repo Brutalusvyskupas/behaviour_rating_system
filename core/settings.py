@@ -179,3 +179,13 @@ MEDIA_URL = 'http://{!s}.s3.amazonaws.com/media/'.format(AWS_STORAGE_BUCKET_NAME
 STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 DEFAULT_FILE_STORAGE = 'core.storages.MediaStore'
+
+# # HTTPS settings
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+# SECURE_SSL_REDIRECT = True
+
+# # HSTS settings
+# SECURE_HSTS_SECONDS = 31536000
+# SECURE_HSTS_PRELOAD = True
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
