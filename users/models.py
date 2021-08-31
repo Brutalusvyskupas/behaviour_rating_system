@@ -71,7 +71,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    profile_image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    profile_image = models.ImageField(default='profile_pics/default.jpg', upload_to='profile_pics')
     objects = UserAccountManager()
 
     USERNAME_FIELD = "email"
