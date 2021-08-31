@@ -197,6 +197,6 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 
 
-# paziuret saugumo nustatyumu SSL sertifikata.Pagrinde klaidas meta homepage.Homepage ft meta per HTTTP, o kitas per HTTPS 
+
 # padaryt default picture kai susikuri vartotoja
 # paziuret kodel letas psl per herokuapp
