@@ -144,7 +144,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 # STATIC_URL = 'static/'
 # STATIC_ROOT = 'static/'
-#STATICFILES_DIRS =[os.path.join(BASE_DIR, 'static')]
+#STATICFILES_DIRS =[os.path.join(BASE_DIR, '/static')]
 #STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -188,15 +188,9 @@ DEFAULT_FILE_STORAGE = 'core.storages.MediaStore'
 # HTTPS settings
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = False #False when running development server
 
 # # HSTS settings
 SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_PRELOAD = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-
-
-
-
-# padaryt default picture kai susikuri vartotoja
-# paziuret kodel letas psl per herokuapp
