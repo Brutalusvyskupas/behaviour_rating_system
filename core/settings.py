@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 from decouple import config
 #import environ
-import django_heroku
+# import django_heroku
 
 #env = environ.Env()
 #environ.Env.read_env()
