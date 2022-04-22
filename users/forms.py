@@ -58,7 +58,7 @@ class RegistrationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs): 
         super().__init__(*args, **kwargs)
         self.fields['first_name'].widget.attrs.update(
-            {'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded-full py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white', 'placeholder': 'First Name'})
+            {'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded-full py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white', 'placeholder': 'First Name'})
         self.fields['last_name'].widget.attrs.update(
             {'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded-full py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'placeholder': 'Last Name'})
         self.fields['email'].widget.attrs.update(
