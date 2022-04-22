@@ -78,12 +78,12 @@ class RegistrationForm(forms.ModelForm):
 class EditUserForm(forms.ModelForm):
 
     last_name = forms.CharField(
-        label="Last name", max_length=50)
-    email = forms.EmailField(max_length=100)
+        label="Last name", max_length=50, widget=forms.TextInput(attrs={"class": "rounded bg-gray-200"}))
+    email = forms.EmailField(max_length=100, widget=forms.TextInput(attrs={"class": "rounded bg-gray-200"}))
     work_office = forms.ModelChoiceField(
         queryset=UserWorkOffice.objects.all())
-    title = forms.CharField(max_length=100, label="Title")
-    phone_number = forms.CharField(max_length=20, label="Phone number")
+    title = forms.CharField(max_length=100, label="Title", widget=forms.TextInput(attrs={"class": "rounded bg-gray-200"}))
+    phone_number = forms.CharField(max_length=20, label="Phone number", widget=forms.TextInput(attrs={"class": "rounded bg-gray-200"}))
     profile_image = forms.ImageField(required=False, widget=forms.FileInput)
 
     class Meta:

@@ -351,6 +351,7 @@
             {% for review in page_obj %}
             <dl>
                 <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    {% if request.user.is_staff %}
                     <dt class="text-sm font-medium text-gray-500">
                         Review by {{ review.reviewed_by.first_name }} {{ review.reviewed_by.last_name }}
                         {{ review.date }}
@@ -358,6 +359,16 @@
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                         {{ review.text }}
                     </dd>
+                    {% else %}
+                    <dt class="text-sm font-medium text-gray-500">
+                        Review by Anonymous
+                        {{ review.date }}
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        {{ review.text }}
+                    </dd>
+                    {% endif %}
+                    {% if request.user.is_staff %}
                     <a class='edit_button' href="{% url 'users:edit_comment' pk=review.pk %}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -365,6 +376,7 @@
                                 d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                         </svg>
                     </a>
+                    {% endif %}
                 </div>
                 {% endfor %}
         </div>

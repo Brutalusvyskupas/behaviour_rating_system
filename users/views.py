@@ -86,7 +86,7 @@ def users_list(request):
     offices = UserWorkOffice.objects.order_by("office_name")
 
     # PAGINATOR
-    paginator = Paginator(offices, 2)
+    paginator = Paginator(offices, 3)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
