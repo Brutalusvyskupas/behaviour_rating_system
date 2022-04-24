@@ -17,7 +17,7 @@ def users_count(request):
 
     return len(users_count)
 
-# All users with rating above 80
+# All users with rating above 80.
 @register.filter(name='overperforming_users_count')
 def overperforming_users_count(request):
     overperforming_users_count = Review.objects.values('reviewed_user__first_name', 'reviewed_user__last_name').annotate(

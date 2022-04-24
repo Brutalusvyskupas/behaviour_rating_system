@@ -4,14 +4,6 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 from users.models import User
 
-# RATE_CHOICES = [
-#     (1, '1 - Poor'),
-#     (2, '2 - Fair'),
-#     (3, '3 - Average'),
-#     (4, '4 - Good'),
-#     (5, '5 - Great')
-# ]
-
 
 class Review(models.Model):
     reviewed_user = models.ForeignKey(

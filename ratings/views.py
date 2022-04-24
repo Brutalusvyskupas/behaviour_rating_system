@@ -16,7 +16,7 @@ def rate_user(request, pk):
     #     messages.error(request, 'You cannot rate yourself!')
     #     return redirect('users:list_of_users')
 
-    # Restriction in users_list page
+    # Restriction in users_list page.
     timeline = timezone.now() - timezone.timedelta(days=1)
     if Review.objects.filter(reviewed_by=request.user, reviewed_user=r_user, date__gt=timeline).exists():
         messages.warning(
