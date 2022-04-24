@@ -2,7 +2,7 @@
   "name": "jstools",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.js", 
   "scripts": {
     "build": "tailwind build ../static/css/tailwind.css -o ../static/css/style.css && cleancss -o ../static/css/style.min.css ../static/css/style.css"
   },

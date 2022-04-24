@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from users.models import User, UserWorkOffice
 from posts.models import Post
 
-
+# home
 @login_required
 def home(request):
     users = User.objects.all()
