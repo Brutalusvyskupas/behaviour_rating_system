@@ -4,6 +4,7 @@ from django.urls import path
 from .views import post_details, all_posts, post_edit, post_delete, create_post
 
 
+# posts url
 app_name = 'posts'
 
 urlpatterns = [

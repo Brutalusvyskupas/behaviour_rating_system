@@ -2,7 +2,7 @@ from django.db import models
 
 from users.models import User
 
-
+# create post
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)

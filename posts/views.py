@@ -8,7 +8,7 @@ from .forms import PostEditForm, CreatePostForm
 def all_posts(request):
     posts = Post.objects.order_by("-date_posted")
 
-    # PAGINATOR
+    # PAGINATOR.
     paginator = Paginator(posts, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
