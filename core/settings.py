@@ -188,7 +188,7 @@ DEFAULT_FILE_STORAGE = 'core.storages.MediaStore'
 # HTTPS settings
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = False #False when running development serverr
+SECURE_SSL_REDIRECT = True #False when running development serverr
 
 # # HSTS settings
 SECURE_HSTS_SECONDS = 31536000
